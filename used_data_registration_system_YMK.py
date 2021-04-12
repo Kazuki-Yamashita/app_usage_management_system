@@ -1,30 +1,17 @@
 import sqlite3
 import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
+import connect_db as conDB #DBへ接続するモジュール
 
+
+#使用歴をDBに登録する関数
 def used_data_registration(undergraduate, lab, id, name, name_ruby, start_time, finish_time, using_second_time, memo):
-    if undergraduate == "理学部":
-        db_name = 'usage_record_db_science.db'
-    elif undergraduate == "工学部":
-        db_name = 'usage_record_db_engineering.db'
-    elif undergraduate == "農学部":
-        db_name = 'usage_record_db_agriculture.db'
-    elif undergraduate == "水産学部":
-        db_name = 'usage_record_db_fisheries.db'
-    elif undergraduate == "医学部":
-        db_name = 'usage_record_db_medicine.db'
-    elif undergraduate == "歯学部":
-        db_name = 'usage_record_db_dentistry.db'
-    elif undergraduate == "法文学部":
-        db_name = 'usage_record_db_low_and_literature.db'
-    elif undergraduate == "教育学部":
-        db_name = 'usage_record_db_education.db'
+    return_db = conDB.connect_usage_db(undergraduate)
+    cur = return_db[0]
+    conn = return_db[1]
 
     reg_start_time = start_time.isoformat(' ', timespec='seconds') #使用開始時間を文字列に変換
     reg_finish_time = finish_time.isoformat(' ', timespec='seconds') #使用終了時間を文字列に変換
-
-    conn = sqlite3.connect(db_name) #該当する学部のデータベースに接続
-    cur = conn.cursor()
 
     #研究室のテーブルが存在しない場合、テーブルを作成
     create_sql = 'CREATE TABLE IF NOT EXISTS {}(id text, name text, name_ruby text, start_time, finish_time, using_time, memo text)'.format(lab)

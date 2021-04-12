@@ -1,26 +1,12 @@
 import sqlite3
+import connect_db as conDB #DBへ接続するモジュール
 
-def registration_user(reg_id, reg_name, reg_ruby_name, reg_undergraduate, reg_lab, password1, reg_time): #データベースの操作を行う
-    global conn
-    if reg_undergraduate == "理学部": #学部によって扱うデータベースを指定
-        db_name = 'user_db_science.db'
-    elif reg_undergraduate == "工学部":
-        db_name = 'user_db_engineering.db'
-    elif reg_undergraduate == "農学部":
-        db_name = 'user_db_agriculture.db'
-    elif reg_undergraduate == "水産学部":
-        db_name = 'user_db_fisheries.db'
-    elif reg_undergraduate == "医学部":
-        db_name = 'user_db_medicine.db'
-    elif reg_undergraduate == "歯学部":
-        db_name = 'user_db_dentistry.db'
-    elif reg_undergraduate == "法文学部":
-        db_name = 'user_db_low_and_literature.db'
-    elif reg_undergraduate == "教育学部":
-        db_name = 'user_db_education.db'
-
-    conn = sqlite3.connect(db_name) #該当する学部のデータベースに接続
-    cur = conn.cursor()
+#データベースの操作を行う
+def registration_user(reg_id, reg_name, reg_ruby_name, reg_undergraduate, reg_lab, password1, reg_time):
+    #DBへ接続する
+    return_db = conDB.connect_user_db(reg_undergraduate)
+    cur = return_db[0]
+    conn = return_db[1]
 
     #テーブル作成のクエリ
     create_sql = 'CREATE TABLE IF NOT EXISTS {}(id text, name text, name_ruby text, undergraduate text, lab_name text, password text, reg_time)'.format(reg_lab)

@@ -1,4 +1,5 @@
 import sqlite3
+import connect_db as conDB #DBへ接続するモジュール
 
 db_list = ('user_db_science.db', 'user_db_engineering.db','user_db_agriculture.db', 'user_db_fisheries.db', 'user_db_medicine.db', 'user_db_dentistry.db', 'user_db_low_and_literature.db', 'user_db_education.db')
 all_user_id_list = [] #登録されている全利用者を格納するリスト
@@ -47,29 +48,14 @@ def confirm_reged_lab(reg_lab):
 
 
 #ログインする際にIDが存在するか確認する関数
-def exist_id(input_ID, selected_undergraduate, selected_lab):
+def exist_id(input_ID, undergraduate, lab):
     lab_id_list = [] #該当する研究室のIDを格納するリスト
-    if selected_undergraduate == "理学部": #学部によって扱うデータベースを指定
-        db_name = 'user_db_science.db'
-    elif selected_undergraduate == "工学部":
-        db_name = 'user_db_engineering.db'
-    elif selected_undergraduate == "農学部":
-        db_name = 'user_db_agriculture.db'
-    elif selected_undergraduate == "水産学部":
-        db_name = 'user_db_fisheries.db'
-    elif selected_undergraduate == "医学部":
-        db_name = 'user_db_medicine.db'
-    elif selected_undergraduate == "歯学部":
-        db_name = 'user_db_dentistry.db'
-    elif selected_undergraduate == "法文学部":
-        db_name = 'user_db_low_and_literature.db'
-    elif selected_undergraduate == "教育学部":
-        db_name = 'user_db_education.db'
-
-    conn = sqlite3.connect(db_name)
+    return_db = conDB.connect_user_db(undergraduate)
+    cur = return_db[0]
+    conn = return_db[1]
     cur = conn.cursor()
 
-    search_id_sql = ('SELECT id from {}'.format(selected_lab))
+    search_id_sql = ('SELECT id from {}'.format(lab))
     for id in cur.execute(search_id_sql):
         real_id = id[0]
         lab_id_list.append(real_id)

@@ -1,5 +1,7 @@
 import sqlite3
 import datetime
+import connect_db as conDB #DBへ接続するモジュール
+
 
 undergraduate_list = ["理学部","工学部","農学部","水産学部","医学部","歯学部","法文学部","教育学部"] #学部一覧
 choices_lab = []
@@ -9,43 +11,16 @@ master_password_list = [] #登録されているマスターパスワードを�
 
 def offer_lab_list(undergraduate, type="normal"): #選択した学部の研究室情報を提供する関数
     choices_lab.clear() #リストの初期化
-    if type == "usage data": #使用履歴の検索の場合
-        if undergraduate == "理学部":
-            db_name = 'usage_record_db_science.db'
-        elif undergraduate == "工学部":
-            db_name = 'usage_record_db_engineering.db'
-        elif undergraduate == "農学部":
-            db_name = 'usage_record_db_agriculture.db'
-        elif undergraduate == "水産学部":
-            db_name = 'usage_record_db_fisheries.db'
-        elif undergraduate == "医学部":
-            db_name = 'usage_record_db_medicine.db'
-        elif undergraduate == "歯学部":
-            db_name = 'usage_record_db_dentistry.db'
-        elif undergraduate == "法文学部":
-            db_name = 'usage_record_db_low_and_literature.db'
-        elif undergraduate == "教育学部":
-            db_name = 'usage_record_db_education.db'
-    else: #使用履歴の検索以外の場合
-        if undergraduate == "理学部":
-            db_name = 'user_db_science.db'
-        elif undergraduate == "工学部":
-            db_name = 'user_db_engineering.db'
-        elif undergraduate == "農学部":
-            db_name = 'user_db_agriculture.db'
-        elif undergraduate == "水産学部":
-            db_name = 'user_db_fisheries.db'
-        elif undergraduate == "医学部":
-            db_name = 'user_db_medicine.db'
-        elif undergraduate == "歯学部":
-            db_name = 'user_db_dentistry.db'
-        elif undergraduate == "法文学部":
-            db_name = 'user_db_low_and_literature.db'
-        elif undergraduate == "教育学部":
-            db_name = 'user_db_education.db'
 
-    conn = sqlite3.connect(db_name) #該当する学部のデータベースに接続
-    cur = conn.cursor()
+    #使用履歴の検索の場合
+    if type == "usage data":
+        return_db = conDB.connect_usage_db(undergraduate)
+    #使用履歴の検索以外の場合
+    else:
+        return_db = conDB.connect_user_db(undergraduate)
+
+    cur = return_db[0]
+    conn = return_db[1]
 
     table_sql = "SELECT name FROM sqlite_master WHERE TYPE='table'"
     for table in cur.execute(table_sql): #テーブル名を取得
@@ -58,25 +33,10 @@ def offer_lab_list(undergraduate, type="normal"): #選択した学部の研究�
     conn.close()
 
 def offer_user_name(search_undergraduate, search_name_lab): #選択した研究室の利用登録者を検索する関数
-    if search_undergraduate == "理学部":
-        db_name = 'user_db_science.db'
-    elif search_undergraduate == "工学部":
-        db_name = 'user_db_engineering.db'
-    elif search_undergraduate == "農学部":
-        db_name = 'user_db_agriculture.db'
-    elif search_undergraduate == "水産学部":
-        db_name = 'user_db_fisheries.db'
-    elif search_undergraduate == "医学部":
-        db_name = 'user_db_medicine.db'
-    elif search_undergraduate == "歯学部":
-        db_name = 'user_db_dentistry.db'
-    elif search_undergraduate == "法文学部":
-        db_name = 'user_db_low_and_literature.db'
-    elif search_undergraduate == "教育学部":
-        db_name = 'user_db_education.db'
-
-    conn = sqlite3.connect(db_name) #該当する学部のデータベースに接続
-    cur = conn.cursor()
+    #DBへ接続
+    return_db = conDB.connect_user_db(search_undergraduate)
+    cur = return_db[0]
+    conn = return_db[1]
 
     user_name_dict.clear()
 
@@ -90,25 +50,10 @@ def offer_user_name(search_undergraduate, search_name_lab): #選択した研究�
     conn.close()
 
 def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day): #使用歴の情報を提供する関数
-    if undergraduate == "理学部":
-        db_name = 'usage_record_db_science.db'
-    elif undergraduate == "工学部":
-        db_name = 'usage_record_db_engineering.db'
-    elif undergraduate == "農学部":
-        db_name = 'usage_record_db_agriculture.db'
-    elif undergraduate == "水産学部":
-        db_name = 'usage_record_db_fisheries.db'
-    elif undergraduate == "医学部":
-        db_name = 'usage_record_db_medicine.db'
-    elif undergraduate == "歯学部":
-        db_name = 'usage_record_db_dentistry.db'
-    elif undergraduate == "法文学部":
-        db_name = 'usage_record_db_low_and_literature.db'
-    elif undergraduate == "教育学部":
-        db_name = 'usage_record_db_education.db'
-
-    conn = sqlite3.connect(db_name) #該当する学部のデータベースに接続
-    cur = conn.cursor()
+    #DBへ接続
+    return_db = conDB.connect_usage_db(undergraduate)
+    cur = return_db[0]
+    conn = return_db[1]
 
     #研究室のテーブルが存在しない場合、テーブルを作成
     create_sql = 'CREATE TABLE IF NOT EXISTS {}(id text, name text, name_ruby text, start_time text, finish_time text, using_time text, memo text)'.format(lab)
@@ -134,9 +79,6 @@ def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day): #�
             datetype_start_time_data = datetime.datetime.strptime(start_time_data, '%Y-%m-%d %H:%M:%S')
             if datetype_start_time_data >= start_day and datetype_start_time_data <= finish_day: #DBからちゅうしゅつした日付が検索期間内の場合
                 usage_record_list.append(data_list) #リストに追加
-
-    conn = sqlite3.connect(db_name) #該当する学部のデータベースに接続
-    cur = conn.cursor()
 
 def offer_master_password(): #マスターパスワードの情報を提供する関数
     db_name = 'master_password_db.db'

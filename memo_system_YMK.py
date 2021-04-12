@@ -2,34 +2,36 @@ import tkinter as tk
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
 import tkinter.ttk #コンボボックスを扱うライブラリ
 import used_data_registration_system_YMK as regUsed #使用歴をDBに記録するモジュール
+import generate_widget as genWid #ウィジェット生成するモジュール
+import show_message as mes #メッセージボックスを表示するモジュール
 
-def make_error(contents): #エラーを表示する関数
-    tk.messagebox.showerror("エラー",contents, parent=memo_window)
 
 def close_memo_window(): #備考記入画面を閉じようとした場合の処理
-    make_error("「記入終了」ボタンを押してください")
+    mes.error("「記入終了」ボタンを押してください", memo_window)
 
 def memo(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ruby, start_using_datetime, finish_using_datetime, using_second_time):
     global memo_window
     memo_window = tk.Tk() #備考を記入するウィンドウを作成
     memo_window.title("備考記入画面") #備考記入ウィンドウのタイトル
     memo_window.geometry('647x400') #備考記入ウィンドウの大きさを指定
-    caution = tk.Label(memo_window, text="この画面への入力時間は測定時間に含まれません。正確に記入してください", fg="red", font=("",12,"bold")) #備考記入画面への注意事項のラベルを生成
-    caution.place(x=20, y=7) #備考記入画面への注意事項のラベルを配置
+
+    caution = genWid.generate_label_widget(memo_window, "この画面への入力時間は測定時間に含まれません。正確に記入してください", 20, 7, "red") #備考記入画面への注意事項のラベルを生成
+    caution["font"] = ("", 12, "bold")
+    
     memo_text = tk.Text(memo_window, state='disabled') #備考を記入するテキストボックスを作成
     memo_text.place(x=20, y=80, width=450, height=250) #テキストボックスを配置
+
     memo_window.protocol('WM_DELETE_WINDOW', close_memo_window) #備考記入画面を閉じようとしたときに記入するように注意する
 
     precautions_text = "※ ガラスセル等、備品を破損した\n 場合も記入してください"
-    precautions = tk.Label(memo_window, text=precautions_text)
-    precautions.place(x=470, y=80)
+    precautions = genWid.generate_label_widget(memo_window, precautions_text, 470, 80)
 
     def text_off(): #「異常なし」のボタンを押した場合
         memo_text['state'] = 'disabled' #テキストに書き込めない状態にする
     def text_on(): #「不具合あり」のボタンを押した場合
         memo_text['state'] = 'normal' #テキストに書き込める状態にする
     def text_delete():
-        memo_delete_confirmation = tk.messagebox.askokcancel("テキストの削除","入力した内容を全て削除しますか？", parent=memo_window) #入力内容を削除するかの確認画面の表示
+        memo_delete_confirmation = mes.askokcancel("テキストの削除", "入力した内容を全て削除しますか？", memo_window) #入力内容を削除するかの確認画面の表示
         if memo_delete_confirmation == True: #「OK」を押した場合
             text_on() #テキストを編集可能にする
             memo_text.delete("1.0",tk.END) #内容を全て削除する
@@ -50,21 +52,21 @@ def memo(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ru
         global memo_confirmation, memo
         memo_confirmation = None
         if checked_btn == 0 and memo_text.get("1.0","end-1c"):
-            make_error("異常がない場合、テキストを削除してください")
+            mes.error("異常がない場合、テキストを削除してください", memo_window)
         elif checked_btn == 1 and not memo_text.get("1.0","end-1c"):
-            make_error("不具合があった場合、内容を記述してください")
+            mes.error("不具合があった場合、内容を記述してください", memo_window)
         else:
-            memo_confirmation = tk.messagebox.askokcancel("メモ最終確認", "これで記入しますか？", parent=memo_window) #メモ記入の最終確認画面の生成
+            memo_confirmation = mes.askokcancel("メモ最終確認", "これで記入しますか？", memo_window) #メモ記入の最終確認画面を表示
 
         if memo_confirmation == True: #「OK」を選択した場合
             memo = memo_text.get("1.0","end-1c") #メモの内容を取得
 
             try: #DBへ記録
                 regUsed.used_data_registration(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ruby, start_using_datetime, finish_using_datetime, using_second_time, memo)
-                tk.messagebox.showinfo("使用歴　記録完了", "記録が完了しました", parent=memo_window)
+                mes.info("使用歴 記録完了","記録が完了しました", memo_window)
                 memo_window.destroy() #備考記入画面を閉じる
             except: #何らかの理由で記録できなかった場合
-                make_error("使用歴を記録できませんでした。")
+                mes.error("使用歴を記録できませんでした。", memo_window)
 
     btn_finish_memo = tk.Button(memo_window,text="記入終了", command=memo_finish, bg='green', height=2, width=7) #メモ記入終了のボタンを生成
     btn_finish_memo.place(x=400,y=340) #メモ記入終了のボタンを配置
