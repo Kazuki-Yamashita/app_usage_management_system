@@ -27,3 +27,8 @@ def generate_message_widget(window, text, width, bg, x, y):
     message = tkinter.Message(window, width=width, bg=bg, text=text)
     message.place(x=x, y=y)
     return message
+
+def generate_button_widget(window, text, command, bg, height, width, x, y):
+    btn = tk.Button(window, text=text, command=lambda: command, bg=bg, height=height, width=width)
+    btn.place(x=x, y=y) #新規登録ボタンを配置
+    return btn

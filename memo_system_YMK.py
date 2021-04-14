@@ -4,6 +4,7 @@ import tkinter.ttk #コンボボックスを扱うライブラリ
 import used_data_registration_system_YMK as regUsed #使用歴をDBに記録するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 
 
 def close_memo_window(): #備考記入画面を閉じようとした場合の処理
@@ -11,13 +12,11 @@ def close_memo_window(): #備考記入画面を閉じようとした場合の処
 
 def memo(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ruby, start_using_datetime, finish_using_datetime, using_second_time):
     global memo_window
-    memo_window = tk.Tk() #備考を記入するウィンドウを作成
-    memo_window.title("備考記入画面") #備考記入ウィンドウのタイトル
-    memo_window.geometry('647x400') #備考記入ウィンドウの大きさを指定
+    memo_window = mw.make_window("備考記入画面", '647x400')
 
     caution = genWid.generate_label_widget(memo_window, "この画面への入力時間は測定時間に含まれません。正確に記入してください", 20, 7, "red") #備考記入画面への注意事項のラベルを生成
     caution["font"] = ("", 12, "bold")
-    
+
     memo_text = tk.Text(memo_window, state='disabled') #備考を記入するテキストボックスを作成
     memo_text.place(x=20, y=80, width=450, height=250) #テキストボックスを配置
 

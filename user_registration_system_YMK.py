@@ -8,6 +8,7 @@ import user_registration_operating_db_YMK as opeDB #データベースを操作�
 import confirm_available_id_system_YMK as conid #データベースに登録するIDがすでに登録されていないか確認するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 
 
 def registration(root): #メイン画面で「新規登録」ボタンを押した際の処理
@@ -16,9 +17,7 @@ def registration(root): #メイン画面で「新規登録」ボタンを押し�
         return
     elif registration_confirm == True: #新規登録確認で「はい」を押した場合
         root.withdraw()
-        registration_window = tk.Tk() #新規登録画面のウィンドウを生成
-        registration_window.title('新規登録画面') #新規登録画面のタイトル
-        registration_window.geometry('614x380') #新規登録画面の大きさ
+        registration_window = mw.make_window("新規登録画面", '614x380')
         #文字の表示
         genWid.generate_label_widget(registration_window, "名前 (漢字 等) : ", 32, 20)
         genWid.generate_label_widget(registration_window, "名前 (フリガナ) : ", 35, 60)

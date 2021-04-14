@@ -4,13 +4,11 @@ import tkinter.ttk #コンボボックスを扱うライブラリ
 import change_master_password_in_DB_YMK as chaPassDB
 import show_message as mes #メッセージボックスを表示するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 
 
 def change_master_password(login_master_password):
-    global change_master_password_window
-    change_master_password_window = tk.Tk()
-    change_master_password_window.title("マスターパスワード 変更画面")
-    change_master_password_window.geometry('360x190')
+    change_master_password_window = mw.make_window("マスターパスワード 変更画面", '360x190')
 
     genWid.generate_label_widget(change_master_password_window, "新しいマスターパスワード : ", 20, 30)
     new_input_password = genWid.generate_entry_widget(change_master_password_window, 30, 150, 30, "*")

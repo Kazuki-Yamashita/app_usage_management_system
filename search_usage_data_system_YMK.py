@@ -7,13 +7,11 @@ import create_table_of_used_data_YMK as table #使用歴の表を作成するモ
 import generate_widget as genWid #ウィジェット生成するモジュール
 import disabled_widget as disWid #ウィジェットを無効化するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 
 
 def search_used_data():
-    global search_used_data_window
-    search_used_data_window = tk.Tk()
-    search_used_data_window.title("使用履歴 検索画面")
-    search_used_data_window.geometry('500x310')
+    search_used_data_window = mw.make_window("使用履歴 検索画面", '500x310')
 
     genWid.generate_label_widget(search_used_data_window, "学部 : ", 60, 20)
     search_lab_undergraduate_combobox = genWid.generate_combobox_widget(
@@ -83,9 +81,13 @@ def search_used_data():
 
         val = tk.StringVar(master=search_used_data_window) #期間指定の有無を調べる
         val.set("no")
-        rb_not_designate = tk.Radiobutton(search_used_data_window, variable=val, value="no", text='期間を指定しない(すべての使用歴を検索)', command=desig_off)
+        
+        rb_not_designate = tk.Radiobutton(search_used_data_window, variable=val, value="no",
+         text='期間を指定しない(すべての使用歴を検索)', command=desig_off)
         rb_not_designate.place(x=120, y=100)
-        rb_designate = tk.Radiobutton(search_used_data_window, variable=val, value="yes", text='期間を指定する', command=desig_on)
+
+        rb_designate = tk.Radiobutton(search_used_data_window, variable=val, value="yes",
+         text='期間を指定する', command=desig_on)
         rb_designate.place(x=120, y=130)
 
         def search_name(): #検索ボタンを押した際の処理
@@ -139,7 +141,7 @@ def search_used_data():
                         return
 
                 try: #使用歴をcsvで出力
-                    table.create_table(info.usage_record_list)
+                    table.create_table(info.usage_record_list, search_used_data_window) #pandasを用いて使用歴の表を作成
                 except:
                     mes.error("CSVを出力できませんでした", search_used_data_window)
 

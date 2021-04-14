@@ -5,13 +5,11 @@ import usage_management_system_base_infomation_YMK as info #基本情報を含�
 import generate_widget as genWid #ウィジェット生成するモジュール
 import disabled_widget as disWid #ウィジェットを無効化するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 
 
 def search_user_name(): #利用者の名前を検索する関数
-    global search_name_window
-    search_name_window = tk.Tk()
-    search_name_window.title("登録者 検索画面")
-    search_name_window.geometry('485x400')
+    search_name_window = mw.make_window("登録者 検索画面", '485x400')
 
     genWid.generate_label_widget(search_name_window, "学部 : ", 85, 20)
     #選択した学部のコンボボックス

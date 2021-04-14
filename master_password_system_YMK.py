@@ -6,16 +6,11 @@ import delete_lab_system_YMK as delLab #研究室・ゼミを削除するモジ�
 import change_master_password_system_YMK as chaPass #マスターパスワードの変更を行うモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 
-
-def make_error(contents): #エラーを表示する関数
-    tk.messagebox.showerror("エラー",contents, parent=master_window)
 
 def master(master_function):
-    global master_window
-    master_window = tk.Tk()
-    master_window.title("マスターパスワード ログイン画面")
-    master_window.geometry('350x217')
+    master_window = mw.make_window("マスターパスワード ログイン画面", '350x217')
 
     genWid.generate_label_widget(master_window, "マスターパスワード : ", 20, 30)
     input_password = genWid.generate_entry_widget(master_window, 30, 120, 33, "*")

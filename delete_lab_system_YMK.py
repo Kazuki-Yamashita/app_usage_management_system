@@ -5,13 +5,11 @@ import usage_management_system_base_infomation_YMK as info #基本情報を含�
 import delete_lab_from_DB_YMK as delLabDB #DBから研究室・ゼミを削除するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 
 
 def delete_lab():
-    global delete_lab_window
-    delete_lab_window = tk.Tk()
-    delete_lab_window.title("研究室・ゼミ 削除画面")
-    delete_lab_window.geometry('500x310')
+    delete_lab_window = mw.make_window("研究室・ゼミ 削除画面", '500x310')
 
     genWid.generate_label_widget(delete_lab_window, "学部 : ", 85, 20)
     search_lab_undergraduate_combobox = genWid.generate_combobox_widget(

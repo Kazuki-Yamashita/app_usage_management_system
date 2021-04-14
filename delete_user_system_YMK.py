@@ -7,13 +7,11 @@ import confirm_available_id_system_YMK as conid #IDが存在するか調べる
 import login_certification_system_YMK as celog #ログイン認証を行うモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 
 
 def delete_user(): #登録者を削除する関数
-    global delete_user_window
-    delete_user_window = tk.Tk()
-    delete_user_window.title("登録者 削除画面")
-    delete_user_window.geometry('500x310')
+    delete_user_window = mw.make_window("登録者 削除画面", '500x310')
 
     genWid.generate_label_widget(delete_user_window, "学部 : ", 85, 20)
     delete_user_undergraduate_combobox = genWid.generate_combobox_widget(
