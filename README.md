@@ -1,23 +1,23 @@
 # app_usage_management_system
 
-## OverView
-This is system that can use management of various application in university's lab, experimental facility.
+##概要
+　大学の研究室・実験施設で各種アプリケーションの管理ができるシステムです。
 
-## How to use
-If you use this system, please click "app_usage_management_main_system_YMK.pyw".
+## 利用方法
+　このシステムを使用する場合は、「app_usage_management_main_system_YMK.pyw」をクリックしてください。
 
-## Importants
-Initial master password is "master_initial-password_YMK". Please change master password when you start using this system.
+## 注意事項
+　初期マスターパスワードは 「master_initial-password_YMK」に設定されています。このシステムを使い始めるときは、マスターパスワードを変更してください。
+ 
+## 主な機能
 
-## Main function 
-
-*login and logout
-*record usage time
-*management user by individual account
-*register user account
-*delete user acount
-*search of user acount
-*output usage record by CSV
-*delete lab
-*management master password that can everything
-*change master password
+*ログインとログアウト
+*使用時間の記録
+*個人アカウントによる管理
+*利用アカウントの登録
+*利用アカウントの削除
+*利用者の検索
+*CSVファイルによる使用記録の出力
+*研究室・ゼミ情報の削除
+*マスターパスワードの管理
+*マスターパスワードの変更
