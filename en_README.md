@@ -11,13 +11,13 @@ Initial master password is set "master_initial-password_YMK". Please change mast
 
 ## Main function 
 
-*login and logout
-*record usage time
-*management user by individual account
-*register user account
-*delete user acount
-*search of user acount
-*output usage record by CSV
-*delete lab
-*management master password that can everything
-*change master password
+* login and logout
+* record usage time
+* management user by individual account
+* register user account
+* delete user acount
+* search of user acount
+* output usage record by CSV
+* delete lab
+* management master password that can everything
+* change master password
