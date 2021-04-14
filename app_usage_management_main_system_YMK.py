@@ -9,7 +9,7 @@ import menubar #メニューバーを作成しているファイル
 import menubar_function as funMenu #メニューバーを選択した際に実行される関数をまとめたモジュール
 import user_registration_system_YMK as regSys #新規登録を行うモジュール
 import usage_management_system_base_infomation_YMK as info #基本情報を提供するモジュール
-import login_certification_system_YMK as celog #ログイン認証を行うモジュール
+import login_certification_system_YMK as logCe #ログイン認証を行うモジュール
 import confirm_available_id_system_YMK as conid #IDが存在するか調べる
 import generate_widget as genWid #ウィジェット生成するモジュール
 import disabled_widget as disWid #ウィジェットを無効化するモジュール
@@ -17,24 +17,25 @@ import show_message as mes #メッセージボックスを表示するモジュ�
 import start_app #アプリケーションを起動させるモジュール
 import close_window_function_before_logout as cloWin #ログアウト前に画面を閉じようとした際の処理を記述したファイル
 import btn_logout_function as btnLogout #ログアウトボタンを押した際に実行される処理
+import is_input_entry as isInp #入力項目にすべて入力しているか判定するモジュール
 
+#ウィンドウの作成
 root = mw.make_window("app 利用管理システム", '485x300')
 
 #メニューバーの生成
 menubar.make_menubar(root)
-
+#現在の画面の状態を記述
 open_result = "before login"
 
 #学部の一覧が表示されるコンボボックスの生成
+genWid.generate_label_widget(root, "学部 : ", 85, 50)
 undergraduate_combobox = genWid.generate_combobox_widget(
             root, "readonly", info.undergraduate_list, "学部選択", 130, 50)
 
 def select_undergraduate(): #学部選択ボタンを押した際、以下のことが実行される
     global selected_undergraduate, lab_list
     selected_undergraduate = undergraduate_combobox.get() #選択した学部を取得
-    global lab_list
     if not selected_undergraduate: #学部を選択していない場合
-        lab_list = None
         mes.error("学部を選択してください", root)
     else:
         info.offer_lab_list(selected_undergraduate) #選択した学部の研究室情報を取得
@@ -42,31 +43,16 @@ def select_undergraduate(): #学部選択ボタンを押した際、以下のこ
 
     if selected_undergraduate: #学部を選択している場合のみ以下の処理を行う
         global lab_combobox
-        lab_combobox = genWid.generate_combobox_widget(root, "readonly", lab_list, "研究室選択", 130, 90)
-
-        def select_lab(): #研究室・ゼミ選択ボタンを押した際、以下のことが実行される
-            global selected_lab
-            selected_lab = lab_combobox.get() #選択した研究室を取得
-            if not selected_lab: #研究室・ゼミを選択していない場合
-                mes.error("研究室・ゼミを選択してください", root)
-            else: #研究室・ゼミを選択している場合]
-                mes.info("研究室・ゼミ名 選択完了", "研究室・ゼミを選択しました", root)
-
-        global btn_select_lab
         genWid.generate_label_widget(root, "研究室・ゼミ : ", 50, 90)
-
-        btn_select_lab = tk.Button(text="研究室・ゼミを選択", command=select_lab) #研究室・ゼミ選択のボタンを生成
-        btn_select_lab.place(x=300, y=90) #研究室・ゼミ選択のボタンを配置
-
-genWid.generate_label_widget(root, "学部 : ", 85, 50)
+        lab_combobox = genWid.generate_combobox_widget(root, "readonly", lab_list, "研究室選択", 130, 90)
 
 btn_select_undergraduate = tk.Button(text='学部を選択', command=select_undergraduate) #学部選択のボタンを生成
 btn_select_undergraduate.place(x=300, y=50) #学部選択のボタンを配置
 
 #現在の時刻を取得し、表示する文字を作成
 now_time = datetime.datetime.now()
-display_now_time = (str(now_time.year) + "年" + str(now_time.month) + "月" + str(now_time.day) + "日\n" + str(now_time.hour) +
- "時" + str(now_time.minute) + "分")
+display_now_time = (str(now_time.year) + "年" + str(now_time.month) + "月" + str(now_time.day) +
+ "日\n" + str(now_time.hour) + "時" + str(now_time.minute) + "分")
 
 #現在の時刻を表示
 genWid.generate_label_widget(root, "現在の時刻 : ", 260, 240)
@@ -80,33 +66,37 @@ genWid.generate_label_widget(root, "パスワード : ", 50, 190)
 txt_password = genWid.generate_entry_widget(root, 30, 130, 190, '*')
 
 def login(): #ログインボタンを押した際、以下のことが実行される
-    global input_ID
     input_ID = txt_id.get() #ユーザーIDを取得して変数に代入
     input_password = txt_password.get() #パスワードを取得して変数に代入
-    selected_lab = lab_combobox.get() #選択した研究室を取得
-    global start_using_datetime, open_result, user_name, user_name_ruby
+    selected_undergraduate = undergraduate_combobox.get() #選択した学部を取得
 
-    if not input_ID and input_password: #IDを入力していない場合
-        mes.error("IDを入力してください", root)
-    elif not input_password and input_ID: #パスワードを入力していない場合
-        mes.error("パスワードを入力してください", root)
-    elif not input_ID and not input_password: #ID、パスワードどちらも入力していない場合
-        mes.error("IDおよびパスワードを入力してください", root)
-    elif not selected_lab or not lab_combobox:
-        mes.error("研究室・ゼミを選択してください", root)
-    elif selected_lab not in lab_list: #選択した研究室・ゼミが選択した学部の研究室一覧に含まれない場合
-        mes.error("選択した学部と研究室・ゼミが一致していません", root)
-    else:
+    try:
+        selected_lab = lab_combobox.get() #選択した研究室を取得
+    except: #研究室・ゼミのコンボボックスが生成されていない場合
+        selected_lab = False
+
+    try: #研究室を選択していない場合
+        lab_list
+    except NameError:
+        mes.error("学部を選択してください", root)
+        return
+
+    global start_using_datetime, user_name, user_name_ruby
+    #入力欄への入力が適切か判定(True or False)
+    is_input = isInp.is_input_entry(selected_lab, input_ID, input_password, lab_list, root)
+
+    if is_input: #入力が適切な場合(True)
         #ログイン認証を行う
-        exist_id = conid.exist_id(input_ID, selected_undergraduate, selected_lab) #IDが存在しない場合、Falseを代入
-        certification = celog.login_certification(input_ID, input_password, selected_undergraduate, selected_lab) #IDとパスワードが一致しない場合、Falseを代入
-        if exist_id == False: #入力したIDが存在しない場合
+        #IDが存在しない場合
+        if not conid.exist_id(input_ID, selected_undergraduate, selected_lab):
             mes.error("IDが存在しません", root)
-        elif certification == False: #ログイン認証できなかった場合
+        #IDとパスワードが一致しない場合
+        elif not logCe.login_certification(input_ID, input_password, selected_undergraduate, selected_lab):
             mes.error("IDとパスワードが一致しません", root)
-        else:
-            user_name = celog.name #ログインした人の名前を取得
-            user_name_ruby = celog.name_ruby #ログインした人の名前のフリガナを取得
+
+        else: #ログインできた場合
+            user_name = logCe.name #ログインした人の名前を取得
+            user_name_ruby = logCe.name_ruby #ログインした人の名前のフリガナを取得
             #任意のアプリケーションの絶対パスを入力(先頭の"r"を忘れないこと)
             app_path =r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
             #アプリを起動
@@ -132,7 +122,6 @@ def login(): #ログインボタンを押した際、以下のことが実行さ
             disWid.disabled_widget(txt_id) #IDの入力欄を無効化
             disWid.disabled_widget(txt_password) #パスワードの入力欄を無効化
             disWid.disabled_widget(btn_select_undergraduate) #学部選択ボタンを無効化
-            disWid.disabled_widget(btn_select_lab) #研究室・ゼミ選択ボタンを無効化
 
             #ログアウトボタンの生成
             btn_logout = tk.Button(text="ログアウト", command=lambda: btnLogout.logout(

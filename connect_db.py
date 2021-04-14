@@ -18,6 +18,8 @@ def connect_user_db(undergraduate): #登録者を保管するDBへ接続する�
         db_name = 'user_db_low_and_literature.db'
     elif undergraduate == "教育学部":
         db_name = 'user_db_education.db'
+    else:
+        return False
 
     #該当する学部のDBに接続
     conn = sqlite3.connect(db_name)

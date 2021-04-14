@@ -4,7 +4,7 @@ import tkinter.ttk #コンボボックスを扱うライブラリ
 import delete_user_from_DB_YMK as delUserDB #DBからユーザーを削除するモジュール
 import usage_management_system_base_infomation_YMK as info #基本情報を含むモジュール
 import confirm_available_id_system_YMK as conid #IDが存在するか調べる
-import login_certification_system_YMK as celog #ログイン認証を行うモジュール
+import login_certification_system_YMK as logCe #ログイン認証を行うモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
@@ -56,7 +56,7 @@ def delete_user(): #登録者を削除する関数
             else:
                 exist_id = conid.exist_id(input_ID, delete_user_undergraduate, delete_user_lab) #IDが存在しているか判定
                 #IDとパスワードが一致しているか判定
-                certification = celog.login_certification(input_ID, input_password, delete_user_undergraduate, delete_user_lab)
+                certification = logCe.login_certification(input_ID, input_password, delete_user_undergraduate, delete_user_lab)
                 if exist_id == False: #入力したIDが存在しない場合
                     mes.error("IDが存在しません", delete_user_window)
                     return
@@ -64,7 +64,7 @@ def delete_user(): #登録者を削除する関数
                     mes.error("IDとパスワードが一致しません", delete_user_window)
                     return
                 else:
-                    delete_user_name = celog.name #削除する登録者の名前を取得して代入
+                    delete_user_name = logCe.name #削除する登録者の名前を取得して代入
                     message = "本当に登録者を削除しますか？\n ID : " + input_ID + "\n name : " + delete_user_name #削除の最終確認で表示するメッセージ
                     delete_user_confirmation = mes.askokcancel("登録者削除 最終確認", message, delete_user_window) #削除の最終確認画面
 

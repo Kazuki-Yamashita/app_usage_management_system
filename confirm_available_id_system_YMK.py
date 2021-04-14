@@ -62,5 +62,7 @@ def exist_id(input_ID, undergraduate, lab):
 
     if input_ID not in lab_id_list: #入力したIDが存在しない場合
         return False
+    else:
+        return True
     cur.close()
     conn.close()

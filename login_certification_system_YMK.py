@@ -29,6 +29,8 @@ def login_certification(input_ID, input_password, undergraduate, lab):
     #入力されたパスワードと登録されているパスワードが異なり、かつマスターパスワードでもない場合
     if input_password != real_password and input_password != master_password:
         return False
+    else:
+        return True
 
     cur.close()
     conn.close()

@@ -19,6 +19,9 @@ def offer_lab_list(undergraduate, type="normal"): #選択した学部の研究�
     else:
         return_db = conDB.connect_user_db(undergraduate)
 
+    if not return_db:
+        return False
+        
     cur = return_db[0]
     conn = return_db[1]
 
