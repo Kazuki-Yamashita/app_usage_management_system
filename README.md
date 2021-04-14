@@ -7,7 +7,8 @@
 　このシステムを使用する場合は、**app_usage_management_main_system_YMK.pyw** をクリックしてください。
 
 ## 注意事項
-　初期マスターパスワードは、**master_initial-password_YMK** に設定されています。<br>このシステムを使い始めるときは、マスターパスワードを変更してください。
+　* 初期マスターパスワードは、**master_initial-password_YMK** に設定されています。<br>このシステムを使い始めるときは、マスターパスワードを変更してください。<br>
+　* このシステムのコードはPythonで記述されています。必要な外部ライブラリは、pandas, subprocess, japanize_matplotlib です。
  
 ## 主な機能
 
