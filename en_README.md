@@ -4,10 +4,10 @@
 This is system that can use management of various application in university's lab, experimental facility.
 
 ## How to use
-If you use this system, please click "app_usage_management_main_system_YMK.pyw".
+If you use this system, please click **app_usage_management_main_system_YMK.pyw**.
 
 ## Importants
-Initial master password is set "master_initial-password_YMK". Please change master password when you start using this system.
+Initial master password is set **master_initial-password_YMK**.<br> Please change master password when you start using this system.
 
 ## Main function 
 
