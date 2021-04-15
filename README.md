@@ -4,11 +4,11 @@
 　大学の研究室・実験施設で各種アプリケーションの管理ができるシステムです。
 
 ## 利用方法
-　* このシステムを使用する場合は、**app_usage_management_main_system_YMK.pyw** をクリックしてください。
+　* このシステムを使用する場合は、**app_usage_management_main_system_YMK.pyw** をクリックしてください。<br>
 　* このシステムのコードはPythonで記述されています。ダウンロードが必要な外部ライブラリは、pandas, subprocess, japanize_matplotlib です。
 
 ## 注意事項
-　* 初期マスターパスワードは、**master_initial-password_YMK** に設定されています。<br>このシステムを使い始めるときは、マスターパスワードを変更してください。<br>
+　初期マスターパスワードは、**master_initial-password_YMK** に設定されています。<br>このシステムを使い始めるときは、マスターパスワードを変更してください。<br>
  
 ## 主な機能
 
