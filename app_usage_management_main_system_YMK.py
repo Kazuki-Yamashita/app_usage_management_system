@@ -18,13 +18,16 @@ import start_app #アプリケーションを起動させるモジュール
 import close_window_function_before_logout as cloWin #ログアウト前に画面を閉じようとした際の処理を記述したファイル
 import btn_logout_function as btnLogout #ログアウトボタンを押した際に実行される処理
 import is_input_entry as isInp #入力項目にすべて入力しているか判定するモジュール
+import is_exist_variable as isVar #変数が存在するか確認するモジュール
+import btn_select_undergraduate_function as btnUnder
+import display_now_time as dispTime #現在の時刻を表示するモジュール
 
 #ウィンドウの作成
 root = mw.make_window("app 利用管理システム", '485x300')
 
 #メニューバーの生成
 menubar.make_menubar(root)
-#現在の画面の状態を記述
+#画面の状態を記述
 open_result = "before login"
 
 #学部の一覧が表示されるコンボボックスの生成
@@ -32,31 +35,25 @@ genWid.generate_label_widget(root, "学部 : ", 85, 50)
 undergraduate_combobox = genWid.generate_combobox_widget(
             root, "readonly", info.undergraduate_list, "学部選択", 130, 50)
 
-def select_undergraduate(): #学部選択ボタンを押した際、以下のことが実行される
+def select_undergraduate(undergraduate_combobox, window): #学部選択ボタンを押した際、以下のことが実行される
     global selected_undergraduate, lab_list
     selected_undergraduate = undergraduate_combobox.get() #選択した学部を取得
     if not selected_undergraduate: #学部を選択していない場合
-        mes.error("学部を選択してください", root)
+        mes.error("学部を選択してください", window)
     else:
         info.offer_lab_list(selected_undergraduate) #選択した学部の研究室情報を取得
         lab_list = info.choices_lab
 
     if selected_undergraduate: #学部を選択している場合のみ以下の処理を行う
         global lab_combobox
-        genWid.generate_label_widget(root, "研究室・ゼミ : ", 50, 90)
-        lab_combobox = genWid.generate_combobox_widget(root, "readonly", lab_list, "研究室選択", 130, 90)
+        genWid.generate_label_widget(window, "研究室・ゼミ : ", 50, 90)
+        lab_combobox = genWid.generate_combobox_widget(window, "readonly", lab_list, "研究室選択", 130, 90)
 
-btn_select_undergraduate = tk.Button(text='学部を選択', command=select_undergraduate) #学部選択のボタンを生成
+btn_select_undergraduate = tk.Button(text='学部を選択', command=lambda: select_undergraduate(undergraduate_combobox, root)) #学部選択のボタンを生成
 btn_select_undergraduate.place(x=300, y=50) #学部選択のボタンを配置
 
-#現在の時刻を取得し、表示する文字を作成
-now_time = datetime.datetime.now()
-display_now_time = (str(now_time.year) + "年" + str(now_time.month) + "月" + str(now_time.day) +
- "日\n" + str(now_time.hour) + "時" + str(now_time.minute) + "分")
-
 #現在の時刻を表示
-genWid.generate_label_widget(root, "現在の時刻 : ", 260, 240)
-genWid.generate_label_widget(root, display_now_time, 340, 240)
+dispTime.now_time(root,"現在の時刻 : ", 260, 240, 340, 240)
 
 #以下IDとパスワードの文字と入力欄を生成
 genWid.generate_label_widget(root, "ユーザーID : ", 50, 150)
@@ -75,9 +72,9 @@ def login(): #ログインボタンを押した際、以下のことが実行さ
     except: #研究室・ゼミのコンボボックスが生成されていない場合
         selected_lab = False
 
-    try: #研究室を選択していない場合
+    try:
         lab_list
-    except NameError:
+    except NameError: #研究室一覧が取得されていない(学部を選択していない場合)
         mes.error("学部を選択してください", root)
         return
 

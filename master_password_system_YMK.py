@@ -1,5 +1,4 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
 import usage_management_system_base_infomation_YMK as info #基本情報を含むモジュール
 import delete_lab_system_YMK as delLab #研究室・ゼミを削除するモジュール

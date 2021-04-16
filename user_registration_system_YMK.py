@@ -13,9 +13,9 @@ import make_window as mw #ウィンドウを作成するモジュール
 
 def registration(root): #メイン画面で「新規登録」ボタンを押した際の処理
     registration_confirm = mes.askyesno("新規登録確認", "利用者の新規登録をしますか？", root) #新規登録を行うかの確認画面
-    if registration_confirm == False: #新規登録確認で「いいえ」を押した場合
+    if not registration_confirm: #新規登録確認で「いいえ」を押した場合
         return
-    elif registration_confirm == True: #新規登録確認で「はい」を押した場合
+    else: #新規登録確認で「はい」を押した場合
         root.withdraw()
         registration_window = mw.make_window("新規登録画面", '614x380')
         #文字の表示
@@ -26,13 +26,12 @@ def registration(root): #メイン画面で「新規登録」ボタンを押し�
         genWid.generate_label_widget(registration_window, "登録するユーザID : ", 24, 180)
         genWid.generate_label_widget(registration_window, "設定するパスワード : ", 20, 220)
         genWid.generate_label_widget(registration_window, "パスワード確認用 : ", 27, 260)
-
+        #名前の書式について記載するメッセージ
         genWid.generate_message_widget(registration_window,
          "※名前の入力について\n姓と名の間は、半角スペースを1つ\n入れてください", 200, "white", 340, 20)
 
-        #名前の入力欄
+        #名前、フリガナの入力欄
         input_name_entry = genWid.generate_entry_widget(registration_window, 30, 130, 20)
-        #名前のフリガナの入力欄
         input_name_ruby_label = genWid.generate_entry_widget(registration_window, 30, 130, 60)
 
         global input_undergraduate_label
@@ -96,31 +95,31 @@ def registration(root): #メイン画面で「新規登録」ボタンを押し�
                     if not reg_name or not reg_ruby_name or not reg_id or not password1 or not password2: #未入力の項目がある場合
                         mes.error("入力していない項目があります", registration_window)
 
-                    elif reg_lab not in choices_lab and reged_lab_ornot == True: #研究室がすでに登録されていて、選択した学部と研究室・ゼミが不一致の場合
+                    elif reg_lab not in choices_lab and reged_lab_ornot: #研究室がすでに登録されていて、選択した学部と研究室・ゼミが不一致の場合
                         mes.error("選択した学部と研究室・ゼミが一致していません", registration_window)
 
-                    elif reged_lab_ornot == False and new_lab_ornot == False: #研究室が登録されておらず、「新規で研究室を登録」にチェックがついていない場合
+                    elif not reged_lab_ornot and not new_lab_ornot: #研究室が登録されておらず、「新規で研究室を登録」にチェックがついていない場合
                         mes.error("新規で研究室を登録する場合、チェックをつけてください", registration_window)
 
-                    elif reged_lab_ornot == True and new_lab_ornot == True: #研究室が登録されていて、「新規で研究室を登録」にチェックがついている場合
+                    elif reged_lab_ornot and new_lab_ornot: #研究室が登録されていて、「新規で研究室を登録」にチェックがついている場合
                         mes.error("研究室が登録済みの場合、チェックはつけないでください", registration_window)
 
-                    elif equal_password_or_not == False: #一致していない場合
+                    elif not equal_password_or_not: #一致していない場合
                         mes.error("パスワードが一致していません！", registration_window)
                         input_txt_password.delete(0, tk.END) #入力したパスワードを削除する
                         input_confirm_password.delete(0, tk.END) #入力した確認用パスワードを削除する
 
-                    elif paw.pattern_name(reg_name) == False: #入力した名前の文字が適切でない場合
+                    elif not paw.pattern_name(reg_name): #入力した名前の文字が適切でない場合
                         mes.error("名前に使用できない文字があります", registration_window)
 
-                    elif paw.pattern_ruby_name(reg_ruby_name) == False: #名前にフリガナが適切でない場合
+                    elif not paw.pattern_ruby_name(reg_ruby_name): #名前にフリガナが適切でない場合
                         mes.error("フリガナに使用できない文字があります", registration_window)
 
-                    elif paw.pattern_id(reg_id) == False: #入力したIDが適切でない場合
+                    elif not paw.pattern_id(reg_id): #入力したIDが適切でない場合
                         mes.error("IDが適切ではありません", registration_window)
                         input_txt_id.delete(0, tk.END)
 
-                    elif paw.pattern_password(password1) == False: #入力したパスワードが適切でない場合
+                    elif not paw.pattern_password(password1): #入力したパスワードが適切でない場合
                         mes.error("パスワードが適切ではありません", registration_window)
                         input_txt_password.delete(0, tk.END) #入力したパスワードを削除する
                         input_confirm_password.delete(0, tk.END) #入力した確認用パスワードを削除する
