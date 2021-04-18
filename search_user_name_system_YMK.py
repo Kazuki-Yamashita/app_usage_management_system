@@ -65,9 +65,8 @@ def search_user_name(): #利用者の名前を検索する関数
                     display_label["bg"] = "white"
 
                     btn_exe_search.destroy() #検索ボタンを削除
-                    disWid.disabled_widget(search_lab_undergraduate_combobox) #学部のコンボボックスを無効化
-                    disWid.disabled_widget(btn_search_name_undergraduate) #学部選択ボタンを無効化
-                    disWid.disabled_widget(lab_combobox) #研究室・ゼミのコンボボックスを無効化
+                    disabled_widget_list = [search_lab_undergraduate_combobox, btn_search_name_undergraduate, lab_combobox]
+                    disWid.disabled_widget(disabled_widget_list) #学部のコンボボックスを無効化
 
                 def del_result(): #削除ボタンを押した際の処理
                     if display_label:

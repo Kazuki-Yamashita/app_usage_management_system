@@ -7,3 +7,4 @@ def start_app(window, path):
         return result
     except subprocess.CalledProcessError:
         mes.error("アプリケーションの実行に失敗しました", window)
+        return False
