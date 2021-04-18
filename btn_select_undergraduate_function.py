@@ -5,7 +5,6 @@ import generate_widget as genWid #ウィジェット生成するモジュール
 #変数の用意
 selected_undergraduate = False
 
-
 #学部選択ボタンを押した際に実行される関数
 def select_undergraduate(undergraduate_combobox, window):
     #選択した学部を取得
@@ -22,8 +21,6 @@ def select_undergraduate(undergraduate_combobox, window):
         #選択した学部の研究室一覧を代入
         lab_list = info.choices_lab
 
-        #研究室選択の文字とコンボボックスを生成
-        genWid.generate_label_widget(window, "研究室・ゼミ : ", 50, 90)
+        #研究室・ゼミ選択コンボボックスを生成
         lab_combobox = genWid.generate_combobox_widget(window,
          "readonly", lab_list, "研究室選択", 130, 90)
-        print(selected_undergraduate)

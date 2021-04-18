@@ -1,7 +1,7 @@
 import show_message as mes #メッセージボックスを表示するモジュール
 
 
-def is_input_entry(lab, id, password, lab_list, window):
+def is_input_entry_login(lab, id, password, lab_list, window):
     if not lab: #研究室を選択していない場合
         mes.error("研究室・ゼミを選択してください", window)
         return False

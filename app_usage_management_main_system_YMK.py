@@ -19,6 +19,9 @@ app_path =r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 #ウィンドウの作成(title, size)
 root = mw.make_window("app 利用管理システム", '485x300')
 
+#現在の時刻を表示
+dispTime.now_time(root, "現在の時刻 : ", 260, 240, 340, 240)
+
 #メニューバーを生成
 menubar.make_menubar(root)
 
@@ -39,8 +42,8 @@ btn_select_undergraduate.place(x=300, y=50)
 btn_select_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
                                             undergraduate_combobox, root)
 
-#現在の時刻を表示
-dispTime.now_time(root, "現在の時刻 : ", 260, 240, 340, 240)
+#研究室・ゼミ選択の文字を表示
+genWid.generate_label_widget(root, "研究室・ゼミ : ", 50, 90)
 
 #IDとパスワードの文字と入力欄を生成
 genWid.generate_label_widget(root, "ユーザーID : ", 50, 150)
