@@ -5,6 +5,7 @@ db_list = ('user_db_science.db', 'user_db_engineering.db','user_db_agriculture.d
 all_user_id_list = [] #登録されている全利用者を格納するリスト
 all_table_list = [] #登録されている全研究室を格納するリスト
 search_user_name_list = [] #研究室検索において、該当する学部の研究室を格納するリスト
+
 #新規登録の際に使用する関数
 def confirm_available_id(reg_id): #登録するIDがすでに存在するか確かめる関数
     for db in db_list: #学部ごとのデータベースを順に処理
@@ -24,8 +25,12 @@ def confirm_available_id(reg_id): #登録するIDがすでに存在するか確�
 
         cur.close()
         conn.close()
+
     if reg_id in all_user_id_list: #登録しようとするIDがすでに存在した場合
         return False
+    else:
+        return True
+
 
 def confirm_reged_lab(reg_lab):
     for db in db_list: #学部ごとのデータベースを順に処理
@@ -64,5 +69,6 @@ def exist_id(input_ID, undergraduate, lab):
         return False
     else:
         return True
+
     cur.close()
     conn.close()
