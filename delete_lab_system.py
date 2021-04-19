@@ -1,8 +1,8 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
 import tkinter.ttk #コンボボックスを扱うライブラリ
-import usage_management_system_base_infomation_YMK as info #基本情報を含むモジュール
-import delete_lab_from_DB_YMK as delLabDB #DBから研究室・ゼミを削除するモジュール
+import usage_management_system_base_infomation as info #基本情報を含むモジュール
+import delete_lab_from_DB as delLabDB #DBから研究室・ゼミを削除するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール

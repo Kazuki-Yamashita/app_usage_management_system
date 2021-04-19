@@ -2,8 +2,8 @@ import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
 import tkinter.ttk #コンボボックスを扱うライブラリ
 import datetime
-import usage_management_system_base_infomation_YMK as info #基本情報を含むモジュール
-import create_table_of_used_data_YMK as table #使用歴の表を作成するモジュール
+import usage_management_system_base_infomation as info #基本情報を含むモジュール
+import create_table_of_used_data as creTable #使用歴の表を作成するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import disabled_widget as disWid #ウィジェットを無効化するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
@@ -81,7 +81,7 @@ def search_used_data():
 
         val = tk.StringVar(master=search_used_data_window) #期間指定の有無を調べる
         val.set("no")
-        
+
         rb_not_designate = tk.Radiobutton(search_used_data_window, variable=val, value="no",
          text='期間を指定しない(すべての使用歴を検索)', command=desig_off)
         rb_not_designate.place(x=120, y=100)
@@ -141,7 +141,7 @@ def search_used_data():
                         return
 
                 try: #使用歴をcsvで出力
-                    table.create_table(info.usage_record_list, search_used_data_window) #pandasを用いて使用歴の表を作成
+                    creTable.create_table(info.usage_record_list, search_used_data_window) #pandasを用いて使用歴の表を作成
                 except:
                     mes.error("CSVを出力できませんでした", search_used_data_window)
 

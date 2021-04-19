@@ -2,8 +2,8 @@ import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox
 import tkinter.ttk
 import datetime
-import usage_management_system_base_infomation_YMK as info
-import confirm_available_id_system_YMK as conid #データベースに登録するIDがすでに登録されていないか確認するモジュール
+import usage_management_system_base_infomation as info
+import confirm_available_id_system as conid #データベースに登録するIDがすでに登録されていないか確認するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール

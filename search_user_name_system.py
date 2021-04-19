@@ -1,7 +1,7 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
 import tkinter.ttk #コンボボックスを扱うライブラリ
-import usage_management_system_base_infomation_YMK as info #基本情報を含むモジュール
+import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import disabled_widget as disWid #ウィジェットを無効化するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール

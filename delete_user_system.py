@@ -1,10 +1,10 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
 import tkinter.ttk #コンボボックスを扱うライブラリ
-import delete_user_from_DB_YMK as delUserDB #DBからユーザーを削除するモジュール
-import usage_management_system_base_infomation_YMK as info #基本情報を含むモジュール
-import confirm_available_id_system_YMK as conid #IDが存在するか調べる
-import login_certification_system_YMK as logCe #ログイン認証を行うモジュール
+import delete_user_from_DB as delUserDB #DBからユーザーを削除するモジュール
+import usage_management_system_base_infomation as info #基本情報を含むモジュール
+import confirm_available_id_system as conid #IDが存在するか調べる
+import login_certification_system as logCe #ログイン認証を行うモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール

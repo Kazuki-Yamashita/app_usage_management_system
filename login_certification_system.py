@@ -1,5 +1,5 @@
 import sqlite3
-import usage_management_system_base_infomation_YMK as info
+import usage_management_system_base_infomation as info
 import connect_db as conDB #DBへ接続するモジュール
 
 

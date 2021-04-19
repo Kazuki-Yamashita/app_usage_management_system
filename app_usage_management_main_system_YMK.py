@@ -6,8 +6,8 @@ import datetime #日時を取得するライブラリ
 import math #数学関数のライブラリ
 import make_window as mw #ウィンドウを作成するモジュール
 import menubar #メニューバーを作成しているファイル
-import user_registration_system_YMK as regSys #新規登録を行うモジュール
-import usage_management_system_base_infomation_YMK as info #基本情報を提供するモジュール
+import user_registration_system as regSys #新規登録を行うモジュール
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
 import btn_login_function as btnLogin #ログインボタンを押した際の処理

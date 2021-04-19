@@ -1,4 +1,4 @@
-import usage_management_system_base_infomation_YMK as info #基本情報を提供するモジュール
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 

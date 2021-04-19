@@ -5,7 +5,7 @@ import btn_select_undergraduate_function as btnUnder #学部選択ボタンを�
 import show_message as mes #メッセージボックスを表示するモジュール
 import is_input_entry as isInp #入力項目にすべて入力しているか判定するモジュール
 import is_able_login as abLogin #ログイン可能か判定するモジュール
-import login_certification_system_YMK as logCe #ログイン認証を行うモジュール
+import login_certification_system as logCe #ログイン認証を行うモジュール
 import start_app #アプリケーションを起動させるモジュール
 import btn_logout_function as btnLogout #ログアウトボタンを押した際に実行される処理
 import close_window_function_before_logout as cloWin #ログアウト前に画面を閉じようとした際の処理を記述したファイル

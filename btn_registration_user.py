@@ -1,7 +1,7 @@
 import datetime
 import is_equal_password as paw #パスワードが確認用と一致しているか判定するモジュール
 import is_input_entry_reg_user as isInpReg #利用登録の際に入力が適切か判定するモジュール
-import confirm_available_id_system_YMK as conid #データベースに登録するIDがすでに登録されていないか確認するモジュール
+import confirm_available_id_system as conid #データベースに登録するIDがすでに登録されていないか確認するモジュール
 import user_registration_to_db as regUserdb #データベースを操作するモジュール(自作)
 import show_message as mes #メッセージボックスを表示するモジュール
 
@@ -32,25 +32,31 @@ def btn_reg_user(user_name, user_ruby_name, reg_undergraduate_combo,
      choices_lab, is_reged_lab, reg_id, new_password, confirm_password, is_equal_password,
       is_new_lab, window, input_new_password, input_confirm_password)
 
-    if result_input:
+    #登録しようとしたIDがすでに登録されているか判定
+    is_available_id = conid.confirm_available_id(reg_id)
+    #登録しようとしたIDがすでに登録されていた場合(False)
+    if not is_available_id:
+        mes.error("このIDは登録できません！", window)
+        return
+
+    if result_input: #入力が適切な場合
         #登録を行うかの最終確認
-        registration_final_confirm = mes.askokcancel("新規利用者登録", "登録しますか？", window)
+        registration_final_confirm = mes.askokcancel("新規利用者登録",
+         "登録しますか？", window)
 
-        if registration_final_confirm: #「OK」を押した場合
-            #登録しようとしたIDがすでに登録されていた場合
-            if not conid.confirm_available_id(reg_id):
-                mes.error("このIDは登録できません！", window)
+        #「OK」を押した場合
+        if registration_final_confirm:
+            #登録した日時を取得
+            reg_time = datetime.datetime.now()
+
+            try: #データベースへ情報を追加する
+                registrating = regUserdb.registration_user(reg_id, reg_name,
+                 reg_ruby_name, reg_undergraduate, reg_lab, new_password, reg_time)
+                #登録完了の画面を表示
+                mes.info("登録完了","登録しました", window)
+                window.destroy()
                 return
-            else: #IDが使用可能な場合
-                reg_time = datetime.datetime.now() #登録した日時を取得
-
-                try: #データベースへ情報を追加する
-                    registrating = regUserdb.registration_user(reg_id, reg_name,
-                     reg_ruby_name, reg_undergraduate, reg_lab, new_password, reg_time)
-                    mes.info("登録完了","登録しました", window)
-                    window.destroy()
-                    return
-                except:
-                    mes.error("登録に失敗しました", window)
-                    return
-                 #処理終了
+            except:
+                mes.error("登録に失敗しました", window)
+                return
+             #処理終了

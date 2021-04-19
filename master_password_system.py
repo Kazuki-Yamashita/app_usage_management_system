@@ -1,8 +1,8 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import usage_management_system_base_infomation_YMK as info #基本情報を含むモジュール
-import delete_lab_system_YMK as delLab #研究室・ゼミを削除するモジュール
-import change_master_password_system_YMK as chaPass #マスターパスワードの変更を行うモジュール
+import usage_management_system_base_infomation as info #基本情報を含むモジュール
+import delete_lab_system as delLab #研究室・ゼミを削除するモジュール
+import change_master_password_system as chaPass #マスターパスワードの変更を行うモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール

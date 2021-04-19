@@ -1,7 +1,7 @@
 import datetime #日時を取得するライブラリ
 import math #数学関数のライブラリ
 import show_message as mes #メッセージボックスを表示するモジュール
-import memo_system_YMK as memo #備考記入、DBへの記録を含むモジュール
+import memo_system as memo #備考記入、DBへの記録を含むモジュール
 
 
 def logout(open_result, selected_undergraduate, selected_lab, input_ID, user_name, user_name_ruby, start_using_datetime, root): #ログアウトボタンを押した際、以下のことが実行される
