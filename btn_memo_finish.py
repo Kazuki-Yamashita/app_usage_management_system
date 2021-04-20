@@ -10,9 +10,9 @@ def btn_memo_finish(window, input_memo, var, undergraduate, lab, id,
     memo_confirmation = False #初期値を設定
 
     #メモの入力とラジオボタンの選択が適切か判定
-    if checked_btn == 0 and input_memo.get("1.0","end-1c"):
+    if checked_btn == "OK" and input_memo.get("1.0","end-1c"):
         mes.error("異常がない場合、テキストを削除してください", window)
-    elif checked_btn == 1 and not input_memo.get("1.0","end-1c"):
+    elif checked_btn == "not_OK" and not input_memo.get("1.0","end-1c"):
         mes.error("不具合があった場合、内容を記述してください", window)
     else: #適切な場合
         #メモ記入の最終確認画面を表示
