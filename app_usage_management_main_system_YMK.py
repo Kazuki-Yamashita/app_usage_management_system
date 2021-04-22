@@ -33,14 +33,14 @@ btn_new_registration["command"] = lambda: regSys.registration(root)
 #以下、ログインに関する記述
 #文字、学部の一覧が表示されるコンボボックスの生成
 genWid.generate_label_widget(root, "学部 : ", 85, 50)
-undergraduate_combobox = genWid.generate_combobox_widget(
+login_undergraduate_combobox = genWid.generate_combobox_widget(
             root, "readonly", info.undergraduate_list, "学部選択", 130, 50)
 
 #学部選択ボタンを生成、配置、コマンド指定
-btn_select_undergraduate = tk.Button(text='学部を選択')
+btn_select_undergraduate = tk.Button(root, text='学部を選択')
 btn_select_undergraduate.place(x=300, y=50)
 btn_select_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
-                                            undergraduate_combobox, root)
+                                            login_undergraduate_combobox, root, 130, 90)
 
 #研究室・ゼミ選択の文字を表示
 genWid.generate_label_widget(root, "研究室・ゼミ : ", 50, 90)
@@ -57,6 +57,6 @@ btn_login = tk.Button(root, text='ログイン', bg='red', height=2, width=7)
 btn_login.place(x=180, y=240)
 btn_login["command"] = lambda: btnLogin.btn_login(root,
     btn_select_undergraduate, btn_login, btn_new_registration, app_path,
-    txt_id, txt_password, undergraduate_combobox, btnLogin.open_result)
+    txt_id, txt_password, login_undergraduate_combobox, btnLogin.open_result)
 
 root.mainloop() #持続的に表示しておく

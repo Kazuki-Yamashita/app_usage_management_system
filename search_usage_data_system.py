@@ -5,7 +5,7 @@ import datetime
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import create_table_of_used_data as creTable #使用歴の表を作成するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
-import disabled_widget as disWid #ウィジェットを無効化するモジュール
+import convert_widget_state as conWid #ウィジェットを無効化するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
 
@@ -63,21 +63,17 @@ def search_used_data():
 
         def desig_off(): #期間を指定していない場合
             #年月日を指定するウィジェットを無効化
-            disWid.disabled_widget(spin_start_year)
-            disWid.disabled_widget(combo_start_month)
-            disWid.disabled_widget(combo_start_day)
-            disWid.disabled_widget(spin_finish_year)
-            disWid.disabled_widget(combo_finish_month)
-            disWid.disabled_widget(combo_finish_day)
+            to_disabled_widget_list = [spin_start_year, combo_start_month, combo_start_day,
+             spin_finish_year, combo_finish_month, combo_finish_day]
+            conWid.to_disabled_widget(to_disabled_widget_list)
 
         def desig_on(): #期間を指定する場合
             #年月日を指定するウィジェットを有効化
-            spin_start_year['state'] = 'normal'
-            combo_start_month['state'] = 'readonly'
-            combo_start_day['state'] = 'readonly'
-            spin_finish_year['state'] = 'normal'
-            combo_finish_month['state'] = 'readonly'
-            combo_finish_day['state'] = 'readonly'
+            to_normal_widget_list = [spin_start_year, spin_finish_year]
+            conWid.to_normal_widget(to_normal_widget_list)
+
+            to_readonly_widget_list = [combo_start_month, combo_start_day, combo_finish_month, combo_finish_day]
+            conWid.to_readonly_widget(to_readonly_widget_list)
 
         val = tk.StringVar(master=search_used_data_window) #期間指定の有無を調べる
         val.set("no")

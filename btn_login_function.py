@@ -1,6 +1,6 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import datetime #日時を取得するライブラリ
-import disabled_widget as disWid #ウィジェットを無効化するモジュール
+import convert_widget_state as conWid #ウィジェットを無効化するモジュール
 import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
 import show_message as mes #メッセージボックスを表示するモジュール
 import is_input_entry as isInp #入力項目にすべて入力しているか判定するモジュール
@@ -71,7 +71,7 @@ def btn_login(window, btn_select_undergraduate, btn_login,
 
             #ログイン後、無効化するウィジェットをリストで指定し、無効化
             disabled_widget_list = [undergraduate_combobox, btn_select_undergraduate, btnUnder.lab_combobox, id, password]
-            disWid.disabled_widget(disabled_widget_list)
+            conWid.to_disabled_widget(disabled_widget_list)
 
             #ログアウトボタンの生成、配置、コマンド指定
             btn_logout = tk.Button(window, text="ログアウト", bg='skyblue', height=2, width=7)

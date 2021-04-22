@@ -12,6 +12,7 @@ import btn_memo_finish as memoFinish #備考記入終了ボタンを押した際
 
 def memo(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ruby,
  start_using_datetime, finish_using_datetime, using_second_time):
+    #ウィンドウの作成
     memo_window = mw.make_window("備考記入画面", '647x400')
 
     #備考記入画面への注意事項の文字を表示
@@ -22,8 +23,9 @@ def memo(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ru
     precautions_text = "※ ガラスセル等、備品を破損した\n 場合も記入してください"
     precautions = genWid.generate_label_widget(memo_window, precautions_text, 470, 80)
 
-    input_memo = tk.Text(memo_window, state='disabled') #備考を記入するテキストボックスを作成
-    input_memo.place(x=20, y=80, width=450, height=250) #テキストボックスを配置
+    #備考を記入するテキストボックスを作成、配置
+    input_memo = tk.Text(memo_window, state='disabled')
+    input_memo.place(x=20, y=80, width=450, height=250)
 
     var = tk.StringVar(master=memo_window) #ラジオボタンのチェックを調べる変数
     var.set("OK")
