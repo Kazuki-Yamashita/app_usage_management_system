@@ -16,7 +16,7 @@ def create_table(data, search_used_data_window): #使用歴を表として出力
     df.to_csv("output_file.csv", encoding="shift_jis", index=False) #csvファイルとして出力
     """
 
-    file = fd.asksaveasfilename(initialfile="data", defaultextension=".csv", title="名前を付けて保存")
+    file = fd.asksaveasfilename(initialfile="data", defaultextension=".csv", title="名前を付けて保存", parent=search_used_data_window)
 
     if file:
         df.to_csv(file, encoding="shift_jis", index=False)

@@ -6,12 +6,13 @@ import generate_widget as genWid #ウィジェット生成するモジュール
 selected_undergraduate = False
 lab_combobox = False
 
-#ログイン画面の学部選択ボタンを押した際に実行される関数
+#学部選択ボタンを押した際に実行される関数
 def select_undergraduate(undergraduate_combobox, window, x, y):
     #選択した学部を取得
     selected_undergraduate = undergraduate_combobox.get()
 
     global lab_list, lab_combobox
+
     if not selected_undergraduate: #学部を選択していない場合
         mes.error("学部を選択してください", window)
         return False

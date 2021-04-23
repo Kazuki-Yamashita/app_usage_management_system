@@ -6,7 +6,7 @@ import connect_db as conDB #DBへ接続するモジュール
 undergraduate_list = ["理学部","工学部","農学部","水産学部","医学部","歯学部","法文学部","教育学部"] #学部一覧
 choices_lab = []
 user_name_dict = {} #利用者の名前とフリガナを格納する辞書
-usage_record_list = [] #使用歴リストを格納するリスト
+
 master_password_list = [] #登録されているマスターパスワードを格納する変数
 
 def offer_lab_list(undergraduate, type="normal"): #選択した学部の研究室情報を提供する関数
@@ -21,7 +21,7 @@ def offer_lab_list(undergraduate, type="normal"): #選択した学部の研究�
 
     if not return_db:
         return False
-        
+
     cur = return_db[0]
     conn = return_db[1]
 
@@ -62,6 +62,7 @@ def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day): #�
     create_sql = 'CREATE TABLE IF NOT EXISTS {}(id text, name text, name_ruby text, start_time text, finish_time text, using_time text, memo text)'.format(lab)
     #使用歴を抽出するSQL文
     sql = "SELECT id, name, name_ruby, start_time, finish_time, using_time, memo FROM {}".format(lab)
+    usage_record_list = [] #使用歴リストを格納するリスト
     usage_record_list.clear() #使用歴のリストをクリア
 
     for record in cur.execute(sql):
@@ -82,6 +83,7 @@ def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day): #�
             datetype_start_time_data = datetime.datetime.strptime(start_time_data, '%Y-%m-%d %H:%M:%S')
             if datetype_start_time_data >= start_day and datetype_start_time_data <= finish_day: #DBからちゅうしゅつした日付が検索期間内の場合
                 usage_record_list.append(data_list) #リストに追加
+    return usage_record_list
 
 def offer_master_password(): #マスターパスワードの情報を提供する関数
     db_name = 'master_password_db.db'
