@@ -15,3 +15,5 @@ def change_master_password_DB(current_master_password, new_master_password): #DB
     conn.commit() #データベースへの反映
     cur.close()
     conn.close() #データベースを閉じる
+
+    return True

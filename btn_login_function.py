@@ -37,7 +37,8 @@ def btn_login(window, btn_select_undergraduate, btn_login,
     #入力欄への入力が適切か判定(True or False)
     is_input = isInp.is_input_entry_login(selected_lab, input_ID, input_password, lab_list, window)
 
-    if is_input: #入力が適切な場合(True)
+    #入力が適切な場合(True)
+    if is_input:
         #ログイン認証を行う
         result_login = abLogin.is_able_login(window, selected_undergraduate, selected_lab, input_ID, input_password)
 

@@ -18,3 +18,5 @@ def delete_user_from_DB(undergraduate, lab, id):
     conn.commit() #データベースへの反映
     cur.close()
     conn.close() #データベースを閉じる
+
+    return True

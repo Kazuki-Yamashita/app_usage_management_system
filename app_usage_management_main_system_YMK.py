@@ -32,12 +32,6 @@ genWid.generate_label_widget(root, "学部 : ", 85, 50)
 login_undergraduate_combobox = genWid.generate_combobox_widget(
             root, "readonly", info.undergraduate_list, "学部選択", 130, 50)
 
-#学部選択ボタンを生成、配置、コマンド指定
-btn_select_undergraduate = tk.Button(root, text='学部を選択')
-btn_select_undergraduate.place(x=300, y=50)
-btn_select_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
-                                            login_undergraduate_combobox, root, 130, 90)
-
 #研究室・ゼミ選択の文字を表示
 genWid.generate_label_widget(root, "研究室・ゼミ : ", 50, 90)
 
@@ -47,6 +41,12 @@ txt_id = genWid.generate_entry_widget(root, 30, 130, 150)
 
 genWid.generate_label_widget(root, "パスワード : ", 50, 190)
 txt_password = genWid.generate_entry_widget(root, 30, 130, 190, '*')
+
+#学部選択ボタンを生成、配置、コマンド指定
+btn_select_undergraduate = tk.Button(root, text='学部を選択')
+btn_select_undergraduate.place(x=300, y=50)
+btn_select_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
+                                        login_undergraduate_combobox, root, 130, 90)
 
 #ログインボタンを生成、配置、コマンド指定
 btn_login = tk.Button(root, text='ログイン', bg='red', height=2, width=7)

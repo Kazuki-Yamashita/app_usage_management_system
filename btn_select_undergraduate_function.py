@@ -16,7 +16,7 @@ def select_undergraduate(undergraduate_combobox, window, x, y):
     if not selected_undergraduate: #学部を選択していない場合
         mes.error("学部を選択してください", window)
         return False
-    else:#学部を選択している場合
+    else: #学部を選択している場合
         #選択した学部の研究室情報を取得
         info.offer_lab_list(selected_undergraduate)
 
