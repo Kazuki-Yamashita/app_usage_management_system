@@ -1,12 +1,10 @@
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
-import confirm_available_id_system as conid #IDが存在するか調べる
 import login_certification_system as logCe #ログイン認証を行うモジュール
 import delete_user_from_DB as delUserDB #DBからユーザーを削除するモジュール
 import is_input_entry as isInp #入力項目にすべて入力しているか判定するモジュール
 import is_able_login as abLogin #ログイン可能か判定するモジュール
 import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
 import show_message as mes #メッセージボックスを表示するモジュール
-import tkinter as tk #GUI作成のためのライブラリ
 
 #「登録者の削除」ボタンを押した際の処理
 def delete_user_btn(window, del_txt_id, del_txt_password,

@@ -1,6 +1,4 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import change_master_password_in_DB as chaPassDB
-import show_message as mes #メッセージボックスを表示するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
 #マスターパスワードの変更ボタンを押した際の処理

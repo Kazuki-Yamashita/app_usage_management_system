@@ -1,7 +1,6 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
-import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
 import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
 import radio_button_command_in_search_usage_data as rdBtnCom #使用歴検索のラジオボタンのコマンドを記述

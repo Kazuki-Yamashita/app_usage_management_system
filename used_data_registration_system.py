@@ -1,5 +1,4 @@
 import sqlite3
-import tkinter as tk #GUI作成のためのライブラリ
 import connect_db as conDB #DBへ接続するモジュール
 
 

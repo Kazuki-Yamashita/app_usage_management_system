@@ -1,6 +1,5 @@
 import tkinter as tk
 import generate_widget as genWid #ウィジェット生成するモジュール
-import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
 import close_memo_window as cloMemo #備考記入画面を閉じようとした際の処理
 import btns_memo_window as btnsMemo #備考記入画面のボタンのコマンドを記述

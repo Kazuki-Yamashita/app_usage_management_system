@@ -5,6 +5,7 @@ import confirm_available_id_system as conid #データベースに登録するID
 import user_registration_to_db as regUserdb #データベースを操作するモジュール(自作)
 import show_message as mes #メッセージボックスを表示するモジュール
 
+
 #利用登録ボタンを押した際の処理
 def btn_reg_user(user_name, user_ruby_name, reg_undergraduate_combo,
  input_lab_name, choices_lab, input_id, input_new_password,

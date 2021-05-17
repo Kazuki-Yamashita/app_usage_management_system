@@ -1,10 +1,6 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import delete_user_from_DB as delUserDB #DBからユーザーを削除するモジュール
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
-import confirm_available_id_system as conid #IDが存在するか調べる
-import login_certification_system as logCe #ログイン認証を行うモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
-import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
 import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
 import btn_del_user #登録情報の削除ボタンを押した際の処理
