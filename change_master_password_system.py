@@ -1,6 +1,4 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import tkinter.ttk #コンボボックスを扱うライブラリ
 import change_master_password_in_DB as chaPassDB
 import show_message as mes #メッセージボックスを表示するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
@@ -23,14 +21,16 @@ def change_master_password(login_master_password):
         new_master_password = new_input_password.get() #新しいマスターパスワードを取得
         new_confirm_master_password = new_input_confirm_password.get() #新しいマスターパスワード(確認用)を取得
 
-        if new_master_password != new_confirm_master_password: #新しいマスターパスワードと確認用が異なる場合
+        #新しいマスターパスワードと確認用が異なる場合
+        if new_master_password != new_confirm_master_password:
             mes.error("新しく設定するマスターパスワードが、確認用と一致していません", change_master_password_window)
             return
-        elif len(new_master_password) < 25: #新しく設定するマスターパスワードが25文字以下の場合
+        #新しく設定するマスターパスワードが25文字以下の場合
+        elif len(new_master_password) < 25:
             mes.error("設定するマスターパスワードは、25文字以上にしてください", change_master_password_window)
             return
         else:
-            #マスターパスワード変更の確認画面
+            #マスターパスワード変更の確認画面を表示
             change_master_password_confirm = mes.askokcancel("マスターパスワード変更 確認画面", "本当にマスターパスワードを変更しますか？", change_master_password_window)
             if change_master_password_confirm == True: #「OK」を押した場合
                 #DBのマスターパスワードを変更する
@@ -42,7 +42,8 @@ def change_master_password(login_master_password):
                     mes.info("マスターパスワード 変更完了", "マスターパスワードを変更しました", change_master_password_window)
                     change_master_password_window.destroy()
 
-    btn_change_master_password = tk.Button(change_master_password_window, text="変更する", command=conn_change_master_password, height=2, width=10)
+    btn_change_master_password = tk.Button(change_master_password_window, text="変更する", height=2, width=10)
     btn_change_master_password.place(x=150, y=140)
+    btn_change_master_password['command'] = conn_change_master_password
 
     change_master_password_window.mainloop()

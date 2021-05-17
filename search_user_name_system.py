@@ -1,6 +1,4 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import tkinter.ttk #コンボボックスを扱うライブラリ
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
@@ -9,7 +7,7 @@ import btn_select_undergraduate_function as btnUnder #学部選択ボタンを�
 import btn_search_name #利用者検索の検索ボタンを押した際の処理
 import btn_del_search_user_result as btnDelRes #利用者検索の削除ボタンを押した際の処理
 
-#利用者の名前を検索する関数
+#利用者を検索する関数
 def search_user_name():
     #ウィンドウの作成
     search_name_window = mw.make_window("登録者 検索画面", '485x400')
@@ -24,15 +22,15 @@ def search_user_name():
     #表示に関する注意書きを表示
     genWid.generate_label_widget(search_name_window, "※一覧が見切れる場合\n　画面を最大化してください", 20, 100)
 
-    #学部選択のボタンを生成
+    #学部選択のボタンを生成、配置、コマンド指定
     btn_search_name_undergraduate = tk.Button(search_name_window, text='学部を選択', state="normal")
-    btn_search_name_undergraduate.place(x=320, y=20) #学部選択のボタンを配置
+    btn_search_name_undergraduate.place(x=320, y=20)
     btn_search_name_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
                             search_user_undergraduate_combobox, search_name_window, 150, 60)
 
     #検索ボタンを生成、配置、コマンド指定
-    btn_exe_search = tk.Button(search_name_window, text="検索", height=2, width=12, state="normal") #検索ボタンの生成
-    btn_exe_search.place(x=180, y=100) #検索ボタンの配置
+    btn_exe_search = tk.Button(search_name_window, text="検索", height=2, width=12, state="normal")
+    btn_exe_search.place(x=180, y=100)
     btn_exe_search["command"] = lambda: btn_search_name.btn_search_name(search_name_window,
      search_user_undergraduate_combobox, btn_exe_search, btn_search_name_undergraduate,
       btnUnder.lab_combobox, btn_del)

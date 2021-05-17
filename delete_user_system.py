@@ -1,6 +1,4 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import tkinter.ttk #コンボボックスを扱うライブラリ
 import delete_user_from_DB as delUserDB #DBからユーザーを削除するモジュール
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import confirm_available_id_system as conid #IDが存在するか調べる
@@ -9,33 +7,40 @@ import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
 
-
-def delete_user(): #登録者を削除する関数
+#登録者を削除する画面
+def delete_user():
     delete_user_window = mw.make_window("登録者 削除画面", '500x310')
 
     genWid.generate_label_widget(delete_user_window, "学部 : ", 85, 20)
     delete_user_undergraduate_combobox = genWid.generate_combobox_widget(
         delete_user_window, "readonly", info.undergraduate_list, "学部選択", 150, 20)
 
-    def select_delete_user_undergraduate(): #学部選択ボタンを押した際の処理
-        delete_user_undergraduate = delete_user_undergraduate_combobox.get() #検索する学部を取得
-        if not delete_user_undergraduate: #学部を選択していない場合
+    #学部選択ボタンを押した際の処理
+    def select_delete_user_undergraduate():
+        #検索する学部を取得
+        delete_user_undergraduate = delete_user_undergraduate_combobox.get()
+
+        #学部を選択していない場合
+        if not delete_user_undergraduate:
             mes.error("学部を選択してください", delete_user_window)
             return
         else:
-            info.offer_lab_list(delete_user_undergraduate) #選択した学部の研究室情報を取得
+            #選択した学部の研究室情報を取得
+            info.offer_lab_list(delete_user_undergraduate)
             lab_list = info.choices_lab #研究室リストを代入
 
             genWid.generate_label_widget(delete_user_window, "研究室・ゼミ : ", 50, 60)
             lab_combobox = genWid.generate_combobox_widget(delete_user_window, "readonly", lab_list, "研究室選択", 150, 60)
 
+            #ID、パスワードの入力欄を生成
             genWid.generate_label_widget(delete_user_window, "ユーザーID : ", 50, 120)
-            del_txt_id = genWid.generate_entry_widget(delete_user_window, 30, 130, 120) #IDの入力欄
+            del_txt_id = genWid.generate_entry_widget(delete_user_window, 30, 130, 120)
 
             genWid.generate_label_widget(delete_user_window, "パスワード : ", 50, 160)
-            del_txt_password = genWid.generate_entry_widget(delete_user_window, 30, 130, 160, "*") #パスワードの入力欄
+            del_txt_password = genWid.generate_entry_widget(delete_user_window, 30, 130, 160, "*")
 
-        def delete_user_btn(): #「登録者の削除」ボタンを押した際の処理
+        #「登録者の削除」ボタンを押した際の処理
+        def delete_user_btn():
             input_ID = del_txt_id.get() #ユーザーIDを取得して変数に代入
             input_password = del_txt_password.get() #パスワードを取得して変数に代入
             delete_user_undergraduate = delete_user_undergraduate_combobox.get() #検索する学部を再度取得し、更新
@@ -77,10 +82,14 @@ def delete_user(): #登録者を削除する関数
                         mes.error("登録者の削除に失敗しました", delete_user_window)
                         return
 
-        btn_delete_user = tk.Button(delete_user_window, text='登録情報を削除する', command=delete_user_btn, height=2, width=15, bg="red") #登録者の削除ボタン
+        #登録者削除ボタンを生成、配置、コマンド指定
+        btn_delete_user = tk.Button(delete_user_window, text='登録情報を削除する', height=2, width=15, bg="red")
         btn_delete_user.place(x=190, y=250)
+        btn_delete_user['command'] = delete_user_btn
 
-    btn_search_name_undergraduate = tk.Button(delete_user_window, text='学部を選択', command=select_delete_user_undergraduate) #学部選択のボタンを生成
+    #学部選択のボタンを生成、配置、コマンド指定
+    btn_search_name_undergraduate = tk.Button(delete_user_window, text='学部を選択')
     btn_search_name_undergraduate.place(x=320, y=20) #学部選択のボタンを配置
+    btn_search_name_undergraduate['command'] = select_delete_user_undergraduate
 
     delete_user_window.mainloop()

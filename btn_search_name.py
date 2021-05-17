@@ -4,7 +4,7 @@ import btn_select_undergraduate_function as btnUnder #学部選択ボタンを�
 import convert_widget_state as conWid #ウィジェットを無効化するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 
-
+#利用者検索の検索ボタンを押した際の処理
 def btn_search_name(window, search_user_undergraduate_combobox,
     btn_exe_search, btn_search_name_undergraduate, lab_combobox, btn_del):
 

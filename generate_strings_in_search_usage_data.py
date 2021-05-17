@@ -1,6 +1,6 @@
 import generate_widget as genWid #ウィジェット生成するモジュール
 
-#文字を表示する処理
+#使用歴検索画面において、文字を表示する処理
 def indicate_strings(window):
     genWid.generate_label_widget(window, "学部 : ", 60, 20)
     genWid.generate_label_widget(window, "研究室・ゼミ : ", 25, 60)

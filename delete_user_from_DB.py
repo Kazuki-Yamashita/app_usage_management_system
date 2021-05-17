@@ -1,8 +1,8 @@
 import sqlite3
 import connect_db as conDB #DBへ接続するモジュール
 
-
-def delete_user_from_DB(undergraduate, lab, id): #登録者を削除する関数
+#登録者を削除する関数
+def delete_user_from_DB(undergraduate, lab, id):
     return_db = conDB.connect_user_db(undergraduate)
     cur = return_db[0]
     conn = return_db[1]

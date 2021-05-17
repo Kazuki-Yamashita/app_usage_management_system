@@ -1,13 +1,12 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import tkinter.ttk #コンボボックスを扱うライブラリ
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import delete_lab_from_DB as delLabDB #DBから研究室・ゼミを削除するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
 
-
+#研究室の削除画面
 def delete_lab():
     delete_lab_window = mw.make_window("研究室・ゼミ 削除画面", '500x310')
 
@@ -15,7 +14,8 @@ def delete_lab():
     search_lab_undergraduate_combobox = genWid.generate_combobox_widget(
                 delete_lab_window, "readonly", info.undergraduate_list, "学部選択", 150, 20)
 
-    def select_delete_lab_undergraduate(): #学部選択ボタンを押した際の処理
+    #学部選択ボタンを押した際の処理
+    def select_delete_lab_undergraduate():
         delete_lab_undergraduate = search_lab_undergraduate_combobox.get() #検索する学部を取得
         if not delete_lab_undergraduate: #学部を選択していない場合
             mes.error("学部を選択してください", delete_lab_window)
@@ -39,13 +39,16 @@ def delete_lab():
                 mes.error("選択した学部と研究室・ゼミが一致していません", delete_lab_window)
             else:
                 message = "本当に研究室・ゼミを削除しますか？"
-                delete_lab_confirmation = tk.messagebox.askokcancel("研究室・ゼミ削除 確認画面", message, parent=delete_lab_window) #研究室・ゼミ削除の確認画面
+                #研究室・ゼミ削除の確認画面
+                delete_lab_confirmation = tk.messagebox.askokcancel("研究室・ゼミ削除 確認画面", message, parent=delete_lab_window)
 
             if delete_lab_confirmation == True: #「OK」を押した場合
                 final_message = "研究室・ゼミを削除した場合、該当する研究室・ゼミの利用登録者の情報も削除されます。\n使用履歴は削除されません"
-                delete_lab_final_confirmation = tk.messagebox.askokcancel("研究室・ゼミ削除 最終確認画面", final_message, parent=delete_lab_window) #研究室・ゼミ削除の最終確認画面
+                #研究室・ゼミ削除の最終確認画面
+                delete_lab_final_confirmation = tk.messagebox.askokcancel("研究室・ゼミ削除 最終確認画面", final_message, parent=delete_lab_window)
 
-                if delete_lab_final_confirmation == True: #最終確認で「OK」を押した場合
+                #最終確認で「OK」を押した場合
+                if delete_lab_final_confirmation == True:
                     #研究室・ゼミをDBから削除
                     delete_lab_ornot = delLabDB.delete_lab_from_DB(delete_lab_undergraduate, delete_lab_lab)
                     if delete_lab_ornot == False: #削除できなかった場合
@@ -58,7 +61,9 @@ def delete_lab():
         btn_delete_lab = tk.Button(delete_lab_window, text='研究室・ゼミを削除する', command=delete_lab_btn, height=2, width=18, bg="red")
         btn_delete_lab.place(x=190, y=250)
 
-    btn_search_name_undergraduate = tk.Button(delete_lab_window, text='学部を選択', command=select_delete_lab_undergraduate) #学部選択のボタンを生成
-    btn_search_name_undergraduate.place(x=320, y=20) #学部選択のボタンを配置
+    #学部選択のボタンを生成、配置、コマンド指定
+    btn_search_name_undergraduate = tk.Button(delete_lab_window, text='学部を選択')
+    btn_search_name_undergraduate.place(x=320, y=20)
+    btn_search_name_undergraduate['command'] = select_delete_lab_undergraduate
 
     delete_lab_window.mainloop()

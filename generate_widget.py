@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.ttk #コンボボックスを扱うライブラリ
-import tkinter.messagebox
 
+#各ウィジェットを生成する関数
 
 def generate_label_widget(window, text, x, y, fg="black"):
     label = tk.Label(window, text=text, fg=fg)

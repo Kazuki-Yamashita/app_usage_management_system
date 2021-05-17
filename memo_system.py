@@ -1,7 +1,4 @@
 import tkinter as tk
-import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import tkinter.ttk #コンボボックスを扱うライブラリ
-import used_data_registration_system as regUsed #使用歴をDBに記録するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
@@ -9,7 +6,7 @@ import close_memo_window as cloMemo #備考記入画面を閉じようとした�
 import btns_memo_window as btnsMemo #備考記入画面のボタンのコマンドを記述
 import btn_memo_finish as memoFinish #備考記入終了ボタンを押した際のコマンドを記述
 
-
+#備考記入画面
 def memo(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ruby,
  start_using_datetime, finish_using_datetime, using_second_time):
     #ウィンドウの作成
@@ -27,8 +24,10 @@ def memo(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ru
     input_memo = tk.Text(memo_window, state='disabled')
     input_memo.place(x=20, y=80, width=450, height=250)
 
-    var = tk.StringVar(master=memo_window) #ラジオボタンのチェックを調べる変数
+    #ラジオボタンのチェックを調べる変数
+    var = tk.StringVar(master=memo_window)
     var.set("OK")
+
     #「異常なし」の場合のラジオボタン、配置、コマンド指定
     radio_btn_OK = tk.Radiobutton(memo_window, value="OK", variable=var, text='異常ありませんでした')
     radio_btn_OK.place(x=20, y=30)

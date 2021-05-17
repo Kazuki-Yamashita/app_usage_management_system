@@ -1,3 +1,4 @@
+#ウィジェットの状態を変更するファイル
 
 #ウィジェットを無効(disabled)にする関数
 def to_disabled_widget(widget_list):

@@ -1,11 +1,6 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import tkinter.ttk #コンボボックスを扱うライブラリ
-import datetime
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
-import create_table_of_used_data as creTable #使用歴の表を作成するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
-import convert_widget_state as conWid #ウィジェットを無効化するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
 import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
@@ -43,8 +38,8 @@ def search_used_data():
     combo_finish_day = genWid.generate_combobox_widget(
         search_used_data_window, "disabled", choice_day, "終了日", 350, 220, 6)
 
-
-    val = tk.StringVar(master=search_used_data_window) #期間指定の有無を調べる
+    #期間指定の有無を調べる
+    val = tk.StringVar(master=search_used_data_window)
     val.set("no")
 
     #「期間を指定しない」ラジオボタンの生成、配置、コマンド指定
@@ -63,14 +58,14 @@ def search_used_data():
      spin_finish_year, combo_finish_month, combo_finish_day)
 
     #学部選択ボタンの生成、配置、コマンド指定
-    btn_search_name_undergraduate = tk.Button(search_used_data_window, text='学部の研究室・ゼミを表示') #学部選択のボタンを生成
-    btn_search_name_undergraduate.place(x=300, y=20) #学部選択のボタンを配置
+    btn_search_name_undergraduate = tk.Button(search_used_data_window, text='学部の研究室・ゼミを表示')
+    btn_search_name_undergraduate.place(x=300, y=20)
     btn_search_name_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
     search_lab_undergraduate_combobox, search_used_data_window, 110, 60)
 
     #検索ボタンの生成、配置、コマンド指定
     btn_exe_search = tk.Button(search_used_data_window, text="検索", height=2, width=7)
-    btn_exe_search.place(x=210, y=260) #検索ボタンの配置
+    btn_exe_search.place(x=210, y=260)
     btn_exe_search["command"] = lambda: btnSeaData.btn_search_usage_data(search_used_data_window,
      search_lab_undergraduate_combobox, val, spin_start_year, combo_start_month, combo_start_day,
       spin_finish_year, combo_finish_month, combo_finish_day)

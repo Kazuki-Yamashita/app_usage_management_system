@@ -5,6 +5,7 @@ import btn_select_undergraduate_function as btnUnder #学部選択ボタンを�
 import is_correct_datetime as isCorDate #年月日の入力が適切かどうか判定するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
 
+#使用履歴検索の検索ボタンを押した際の処理
 def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
  spin_start_year, combo_start_month, combo_start_day, spin_finish_year,
   combo_finish_month, combo_finish_day):

@@ -4,7 +4,7 @@ import generate_widget as genWid #ウィジェット生成するモジュール
 import usage_management_system_base_infomation as info
 import btn_registration_user as btnRegUser #利用登録ボタンを押した際の処理
 
-
+#新規利用登録の学部選択ボタンを押した際の処理
 def btn_undergraduate_in_user_registration(window,
  input_user_name, input_user_name_ruby, reg_undergraduate_combo):
     #選択した学部を取得

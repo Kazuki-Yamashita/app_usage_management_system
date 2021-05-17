@@ -2,17 +2,19 @@ import sqlite3
 import usage_management_system_base_infomation as info
 import connect_db as conDB #DBへ接続するモジュール
 
-
+#ログイン認証を行う関数
 def login_certification(input_ID, input_password, undergraduate, lab):
     return_db = conDB.connect_user_db(undergraduate)
     cur = return_db[0]
     conn = return_db[1]
 
     global master_password
-    info.offer_master_password() #マスターパスワードをDBから抽出
-    try:
-        master_password = info.master_password_list[0] #マスターパスワードを取得
-    except: #初回のみ
+    #マスターパスワードをDBから抽出
+    info.offer_master_password()
+
+    try: #マスターパスワードを取得
+        master_password = info.master_password_list[0]
+    except: #初回のみ実行される
         master_password = "master_initial-password_YMK"
 
     #該当する学部のDBから入力されたIDのパスワードを取得

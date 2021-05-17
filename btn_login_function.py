@@ -12,6 +12,7 @@ import close_window_function_before_logout as cloWin #ログアウト前に画�
 
 #画面の状態を記述
 open_result = "before login"
+
 #ログインボタンを押した際に実行される処理
 def btn_login(window, btn_select_undergraduate, btn_login,
  btn_new_registration, app_path, id, password, undergraduate_combobox, open_result):

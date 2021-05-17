@@ -9,7 +9,9 @@ user_name_dict = {} #利用者の名前とフリガナを格納する辞書
 
 master_password_list = [] #登録されているマスターパスワードを格納する変数
 
-def offer_lab_list(undergraduate, type="normal"): #選択した学部の研究室情報を提供する関数
+
+#選択した学部の研究室情報を提供する関数
+def offer_lab_list(undergraduate, type="normal"):
     choices_lab.clear() #リストの初期化
 
     #使用履歴の検索の場合
@@ -35,7 +37,9 @@ def offer_lab_list(undergraduate, type="normal"): #選択した学部の研究�
     cur.close()
     conn.close()
 
-def offer_user_name(search_undergraduate, search_name_lab): #選択した研究室の利用登録者を検索する関数
+
+#選択した研究室の利用登録者を提供する関数
+def offer_user_name(search_undergraduate, search_name_lab):
     #DBへ接続
     return_db = conDB.connect_user_db(search_undergraduate)
     cur = return_db[0]
@@ -52,7 +56,9 @@ def offer_user_name(search_undergraduate, search_name_lab): #選択した研究�
     cur.close()
     conn.close()
 
-def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day): #使用歴の情報を提供する関数
+
+#使用歴の情報を提供する関数
+def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day):
     #DBへ接続
     return_db = conDB.connect_usage_db(undergraduate)
     cur = return_db[0]
@@ -81,11 +87,14 @@ def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day): #�
         elif desig_ornot == "yes": #検索期間を措定している場合
             #DBから抽出した日付の文字列を、日付の型に変換
             datetype_start_time_data = datetime.datetime.strptime(start_time_data, '%Y-%m-%d %H:%M:%S')
-            if datetype_start_time_data >= start_day and datetype_start_time_data <= finish_day: #DBからちゅうしゅつした日付が検索期間内の場合
+            #DBから抽出した日付が検索期間内の場合
+            if datetype_start_time_data >= start_day and datetype_start_time_data <= finish_day:
                 usage_record_list.append(data_list) #リストに追加
     return usage_record_list
 
-def offer_master_password(): #マスターパスワードの情報を提供する関数
+
+#マスターパスワードの情報を提供する関数
+def offer_master_password():
     db_name = 'master_password_db.db'
     conn = sqlite3.connect(db_name) #マスターパスワードのDBに接続
     cur = conn.cursor()

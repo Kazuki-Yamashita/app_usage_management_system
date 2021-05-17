@@ -12,6 +12,7 @@ def is_input_entry_reg_user(user_name, user_ruby_name, reg_lab,
         mes.error("入力していない項目があります", window)
         return False
 
+    #研究室を選択していない場合
     elif not reg_lab:
         mes.error("研究室を選択してください", window)
         return False

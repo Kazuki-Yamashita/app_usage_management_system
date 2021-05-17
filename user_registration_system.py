@@ -1,6 +1,4 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import tkinter.ttk
-import datetime
 import usage_management_system_base_infomation as info
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール

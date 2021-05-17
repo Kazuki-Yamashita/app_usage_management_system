@@ -1,6 +1,8 @@
 import sqlite3
 
-def connect_user_db(undergraduate): #登録者を保管するDBへ接続する関数
+
+#登録者を保管するDBへ接続する関数
+def connect_user_db(undergraduate):
     #学部によって扱うデータベースを指定
     if undergraduate == "理学部":
         db_name = 'user_db_science.db'
@@ -27,7 +29,9 @@ def connect_user_db(undergraduate): #登録者を保管するDBへ接続する�
 
     return cur, conn
 
-def connect_usage_db(undergraduate): #使用歴を保管するDBへ接続する関数
+
+#使用歴を保管するDBへ接続する関数
+def connect_usage_db(undergraduate):
     if undergraduate == "理学部":
         db_name = 'usage_record_db_science.db'
     elif undergraduate == "工学部":

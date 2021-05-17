@@ -1,7 +1,7 @@
 import datetime #日時を取得するライブラリ
 import generate_widget as genWid #ウィジェット生成するモジュール
 
-
+#現在の日時を表示する関数
 def now_time(window, string, str_x, str_y, time_x, time_y):
     now_time = datetime.datetime.now()
     display_now_time = (str(now_time.year) + "年" + str(now_time.month) + "月" + str(now_time.day) +

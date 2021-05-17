@@ -1,9 +1,5 @@
-import subprocess #外部アプリを実行ためのライブラリ
 import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import tkinter.ttk #コンボボックスを扱うライブラリ
-import datetime #日時を取得するライブラリ
-import math #数学関数のライブラリ
 import make_window as mw #ウィンドウを作成するモジュール
 import menubar #メニューバーを作成しているファイル
 import user_registration_system as regSys #新規登録を行うモジュール
