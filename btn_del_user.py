@@ -21,6 +21,7 @@ def delete_user_btn(window, del_txt_id, del_txt_password,
           delete_user_lab = btnUnder.lab_combobox.get()
       except:
           delete_user_lab = False
+          return
 
       #入力欄への入力が適切か判定(True or False)
       is_input = isInp.is_input_entry_login(delete_user_lab, input_ID,
