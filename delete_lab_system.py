@@ -22,7 +22,7 @@ def delete_lab():
     btn_search_name_undergraduate = tk.Button(delete_lab_window, text='学部を選択')
     btn_search_name_undergraduate.place(x=320, y=20)
     btn_search_name_undergraduate['command'] = lambda: btnUnder.select_undergraduate(
-     delete_lab_undergraduate_combobox, delete_lab_window, 150, 60)
+     delete_lab_window, "delete_lab", delete_lab_undergraduate_combobox, 150, 60)
 
     #「研究室・ゼミの削除」ボタンを生成、配置、コマンド指定
     btn_delete_lab = tk.Button(delete_lab_window, text='研究室・ゼミを削除する', height=2, width=18, bg="red")

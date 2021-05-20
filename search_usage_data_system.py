@@ -60,7 +60,7 @@ def search_used_data():
     btn_search_name_undergraduate = tk.Button(search_used_data_window, text='学部の研究室・ゼミを表示')
     btn_search_name_undergraduate.place(x=300, y=20)
     btn_search_name_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
-    search_lab_undergraduate_combobox, search_used_data_window, 110, 60)
+    search_used_data_window, "search_usage_data", search_lab_undergraduate_combobox, 110, 60)
 
     #検索ボタンの生成、配置、コマンド指定
     btn_exe_search = tk.Button(search_used_data_window, text="検索", height=2, width=7)

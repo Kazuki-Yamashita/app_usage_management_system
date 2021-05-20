@@ -9,11 +9,10 @@ def btn_delete_lab(window, delete_lab_undergraduate_combobox):
       delete_lab_undergraduate = delete_lab_undergraduate_combobox.get() #学部を取得
 
       #選択した学部の研究室情報を取得
-      info.offer_lab_list(delete_lab_undergraduate)
-      lab_list = info.choices_lab #研究室リストを代入
+      lab_list = info.offer_lab_list(delete_lab_undergraduate)
 
       try: #選択した研究室を取得
-          delete_lab_lab = btnUnder.lab_combobox.get()
+          delete_lab_lab = btnUnder.lab_combobox_delete_lab.get()
       except:
           delete_lab_lab = False
           return

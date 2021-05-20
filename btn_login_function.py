@@ -1,5 +1,6 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import datetime #日時を取得するライブラリ
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
 import convert_widget_state as conWid #ウィジェットを無効化するモジュール
 import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
 import show_message as mes #メッセージボックスを表示するモジュール
@@ -19,23 +20,29 @@ def btn_login(window, btn_select_undergraduate, btn_login,
 
     input_ID = id.get() #入力したユーザーIDを取得
     input_password = password.get() #入力したパスワードを取得
-    selected_undergraduate = undergraduate_combobox.get() #選択した学部を取得
 
-    try:
-        selected_lab = btnUnder.lab_combobox.get() #選択した研究室を取得
-    except: #研究室・ゼミのコンボボックスが生成されていない場合
-        selected_lab = False
+    #選択した学部を取得
+    selected_undergraduate = undergraduate_combobox.get()
+    #選択した学部の研究室一覧を取得(リスト)
+    lab_list = info.offer_lab_list(selected_undergraduate)
 
-    try:
-        btnUnder.lab_list
-    except : #研究室一覧が取得されていない(学部を選択していない)場合
+    #学部を選択していない場合
+    if not selected_undergraduate:
         mes.error("学部を選択してください", window)
         return
 
-    lab_list = btnUnder.lab_list #選択した学部の研究室リスト
+    try: #研究室のコンボボックスが表示されていない状態で検索ボタンを押したか判定
+        btnUnder.login_lab_list
+    except: #研究室一覧が取得されていない(学部を選択していない)場合
+        mes.error("研究室・ゼミを選択してください", window)
+        return
+
+    #選択した研究室を取得
+    selected_lab = btnUnder.lab_combobox_login.get()
 
     #入力欄への入力が適切か判定(True or False)
-    is_input = isInp.is_input_entry_login(selected_lab, input_ID, input_password, lab_list, window)
+    is_input = isInp.is_input_entry_login(selected_lab, input_ID,
+     input_password, lab_list, window)
 
     #入力が適切な場合(True)
     if is_input:
@@ -72,7 +79,7 @@ def btn_login(window, btn_select_undergraduate, btn_login,
             btn_new_registration.destroy() #「新規登録」ボタンを消す
 
             #ログイン後、無効化するウィジェットをリストで指定し、無効化
-            disabled_widget_list = [undergraduate_combobox, btn_select_undergraduate, btnUnder.lab_combobox, id, password]
+            disabled_widget_list = [undergraduate_combobox, btn_select_undergraduate, btnUnder.lab_combobox_login, id, password]
             conWid.to_disabled_widget(disabled_widget_list)
 
             #ログアウトボタンの生成、配置、コマンド指定

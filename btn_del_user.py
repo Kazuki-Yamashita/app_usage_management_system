@@ -9,19 +9,28 @@ import show_message as mes #メッセージボックスを表示するモジュ�
 #「登録者の削除」ボタンを押した際の処理
 def delete_user_btn(window, del_txt_id, del_txt_password,
  delete_user_undergraduate_combobox):
-      input_ID = del_txt_id.get() #ユーザーIDを取得して変数に代入
-      input_password = del_txt_password.get() #パスワードを取得して変数に代入
-      delete_user_undergraduate = delete_user_undergraduate_combobox.get() #検索する学部を再度取得し、更新
 
-      #選択した学部の研究室情報を取得
-      info.offer_lab_list(delete_user_undergraduate)
-      lab_list = info.choices_lab #研究室リストを代入
+      input_ID = del_txt_id.get() #入力したユーザーIDを取得
+      input_password = del_txt_password.get() #入力したパスワードを取得
 
-      try: #選択した研究室を取得
-          delete_user_lab = btnUnder.lab_combobox.get()
-      except:
-          delete_user_lab = False
+      #選択した学部を取得
+      delete_user_undergraduate = delete_user_undergraduate_combobox.get()
+      #選択した学部の研究室一覧を取得(リスト)
+      lab_list = info.offer_lab_list(delete_user_undergraduate)
+
+      #学部を選択していない場合
+      if not delete_user_undergraduate:
+          mes.error("学部を選択してください", window)
           return
+
+      try: #研究室のコンボボックスが表示されていない状態で検索ボタンを押したか判定
+          btnUnder.delete_user_lab_list
+      except: #研究室一覧が取得されていない(学部を選択していない)場合
+          mes.error("研究室・ゼミを選択してください", window)
+          return
+
+      #選択した研究室を取得
+      delete_user_lab = btnUnder.lab_combobox_delete_user.get()
 
       #入力欄への入力が適切か判定(True or False)
       is_input = isInp.is_input_entry_login(delete_user_lab, input_ID,

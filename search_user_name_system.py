@@ -22,24 +22,24 @@ def search_user_name():
     genWid.generate_label_widget(search_name_window, "※一覧が見切れる場合\n　画面を最大化してください", 20, 100)
 
     #学部選択のボタンを生成、配置、コマンド指定
-    btn_search_name_undergraduate = tk.Button(search_name_window, text='学部を選択', state="normal")
-    btn_search_name_undergraduate.place(x=320, y=20)
-    btn_search_name_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
-                            search_user_undergraduate_combobox, search_name_window, 150, 60)
+    btn_search_user_name_undergraduate = tk.Button(search_name_window, text='学部を選択', state="normal")
+    btn_search_user_name_undergraduate.place(x=320, y=20)
+    btn_search_user_name_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
+                            search_name_window, "search_user", search_user_undergraduate_combobox, 150, 60)
 
     #検索ボタンを生成、配置、コマンド指定
     btn_exe_search = tk.Button(search_name_window, text="検索", height=2, width=12, state="normal")
     btn_exe_search.place(x=180, y=100)
-    btn_exe_search["command"] = lambda: btn_search_name.btn_search_name(search_name_window,
-     search_user_undergraduate_combobox, btn_exe_search, btn_search_name_undergraduate,
-      btnUnder.lab_combobox, btn_del)
+    btn_exe_search["command"] = lambda: btn_search_name.btn_search_user_name(search_name_window,
+     search_user_undergraduate_combobox, btn_exe_search, btn_search_user_name_undergraduate,
+      btnUnder.lab_combobox_search_user, btn_del)
 
     #検索結果の削除ボタンを生成、配置、コマンド指定
     btn_del = tk.Button(search_name_window, text="検索結果をクリア",
      bg="red", height=2, width=12, state="disabled")
     btn_del.place(x=320, y=100)
     btn_del["command"] = lambda: btnDelRes.btn_del_result(btn_search_name.result_label,
-     search_user_undergraduate_combobox, btn_search_name_undergraduate,
-      btnUnder.lab_combobox, btn_exe_search, btn_del)
+     search_user_undergraduate_combobox, btn_search_user_name_undergraduate,
+      btnUnder.lab_combobox_search_user, btn_exe_search, btn_del)
 
     search_name_window.mainloop()

@@ -46,7 +46,7 @@ txt_password = genWid.generate_entry_widget(root, 30, 130, 190, '*')
 btn_select_undergraduate = tk.Button(root, text='学部を選択')
 btn_select_undergraduate.place(x=300, y=50)
 btn_select_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
-                                        login_undergraduate_combobox, root, 130, 90)
+                                        root, "login", login_undergraduate_combobox, 130, 90)
 
 #ログインボタンを生成、配置、コマンド指定
 btn_login = tk.Button(root, text='ログイン', bg='red', height=2, width=7)

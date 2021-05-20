@@ -27,7 +27,7 @@ def delete_user():
     btn_search_name_undergraduate = tk.Button(delete_user_window, text='学部を選択')
     btn_search_name_undergraduate.place(x=320, y=20)
     btn_search_name_undergraduate['command'] = lambda: btnUnder.select_undergraduate(
-     delete_user_undergraduate_combobox, delete_user_window, 150, 60)
+     delete_user_window, "delete_user", delete_user_undergraduate_combobox, 150, 60)
 
     #登録者削除ボタンを生成、配置、コマンド指定
     btn_delete_user = tk.Button(delete_user_window, text='登録情報を削除する', height=2, width=15, bg="red")

@@ -4,14 +4,15 @@ import connect_db as conDB #DBへ接続するモジュール
 
 
 undergraduate_list = ["理学部","工学部","農学部","水産学部","医学部","歯学部","法文学部","教育学部"] #学部一覧
-choices_lab = []
-user_name_dict = {} #利用者の名前とフリガナを格納する辞書
+
+
 
 master_password_list = [] #登録されているマスターパスワードを格納する変数
 
 
 #選択した学部の研究室情報を提供する関数
 def offer_lab_list(undergraduate, type="normal"):
+    choices_lab = []
     choices_lab.clear() #リストの初期化
 
     #使用履歴の検索の場合
@@ -33,6 +34,7 @@ def offer_lab_list(undergraduate, type="normal"):
         choices_lab.append(real_table) #choices_labに追加
 
     choices_lab.sort()
+    return choices_lab
 
     cur.close()
     conn.close()
@@ -45,6 +47,7 @@ def offer_user_name(search_undergraduate, search_name_lab):
     cur = return_db[0]
     conn = return_db[1]
 
+    user_name_dict = {} #利用者の名前とフリガナを格納する辞書
     user_name_dict.clear()
 
     name_sql = "SELECT name,id FROM {}".format(search_name_lab)
@@ -52,6 +55,8 @@ def offer_user_name(search_undergraduate, search_name_lab):
         real_name = name[0]
         real_id = name[1]
         user_name_dict[real_id] = real_name #フリガナを辞書のキーに、名前を値に代入
+
+    return user_name_dict
 
     cur.close()
     conn.close()

@@ -10,30 +10,36 @@ def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
  spin_start_year, combo_start_month, combo_start_day, spin_finish_year,
   combo_finish_month, combo_finish_day):
 
-    search_undergraduate = undergraduate_combobox.get() #検索する学部を取得
+    #選択した学部を取得
+    search_usage_data_undergraduate = undergraduate_combobox.get()
+    #選択した学部の研究室一覧を取得(リスト)
+    lab_list = info.offer_lab_list(search_usage_data_undergraduate)
+
 
     #学部を選択していない場合
-    if not search_undergraduate:
+    if not search_usage_data_undergraduate:
         mes.error("学部を選択してください", window)
-        return False
-
-    #研究室のコンボボックスが表示されていない状態で検索ボタンを押した場合
-    try:
-        searching_lab = btnUnder.lab_combobox.get()
-    except:
-        mes.error("研究室を選択してください", window)
         return
 
+    try: #研究室のコンボボックスが表示されていない状態で検索ボタンを押したか判定
+        btnUnder.search_usage_data_lab_list
+    except:
+        mes.error("研究室・ゼミを選択してください", window)
+        return
+
+    #検索する研究室を取得
+    search_usage_data_lab = btnUnder.lab_combobox_search_usage_data.get()
+
+    #以下、ファイル分け可能
     #研究室のコンボボックスが表示されているが、選択せずに検索ボタンを押した場合
-    if not searching_lab:
-        mes.error("研究室を選択してください", window)
+    if not search_usage_data_lab:
+        mes.error("研究室・ゼミを選択してください", window)
         return
 
     #選択した学部と研究室・ゼミが一致しない場合
-    if searching_lab not in btnUnder.lab_list:
+    if search_usage_data_lab not in lab_list:
         mes.error("選択した学部と研究室・ゼミが一致していません", window)
         return
-
 
     desig_ornot = select_radiobutton.get() #選択しているラジオボタンを取得
 
@@ -58,7 +64,7 @@ def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
 
     #選択した研究室の使用履歴を取得
     try:
-        used_record = info.offer_used_data(search_undergraduate, searching_lab, desig_ornot,
+        used_record = info.offer_used_data(search_usage_data_undergraduate, search_usage_data_lab, desig_ornot,
          search_start_time, search_finish_time)
     except:
         if len(used_record) == 0: #使用歴がない場合
