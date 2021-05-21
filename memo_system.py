@@ -32,7 +32,7 @@ def memo(selected_undergraduate, selected_lab, input_ID, user_name, user_name_ru
     radio_btn_OK.place(x=20, y=30)
     radio_btn_OK["command"] = lambda: btnsMemo.text_off(input_memo)
 
-    #「不具合あり」の場合のラジオボタンを生成、配置、指定
+    #「不具合あり」の場合のラジオボタンを生成、配置、コマンド指定
     radio_btn_notOK = tk.Radiobutton(memo_window, value="not_OK", variable=var,
      text='不具合がありました　（以下の欄にその内容を書き込んでください）')
     radio_btn_notOK.place(x=20, y=50)

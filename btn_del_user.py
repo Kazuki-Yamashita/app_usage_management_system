@@ -1,10 +1,10 @@
-import usage_management_system_base_infomation as info #基本情報を含むモジュール
-import login_certification_system as logCe #ログイン認証を行うモジュール
-import delete_user_from_DB as delUserDB #DBからユーザーを削除するモジュール
-import is_input_entry #入力項目にすべて入力しているか判定するモジュール
-import is_able_login as abLogin #ログイン可能か判定するモジュール
-import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
 import show_message as mes #メッセージボックスを表示するモジュール
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
+import is_input_entry #入力項目にすべて入力しているか判定するモジュール
+import login_certification_system as logCe #ログイン認証を行うモジュール
+import is_able_login as abLogin #ログイン可能か判定するモジュール
+import delete_user_from_DB as delUserDB #DBからユーザーを削除するモジュール
+import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
 
 
 #「登録者の削除」ボタンを押した際の処理

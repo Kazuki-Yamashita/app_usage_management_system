@@ -1,7 +1,7 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import menubar_function as funMenu #メニューバーを選択した際に実行される関数をまとめたモジュール
 
-def make_menubar(root):
+def make_menubar(main_window):
     menubar = tk.Menu() #メニューバーの作成
 
     #メニューコマンドの作成
@@ -19,4 +19,4 @@ def make_menubar(root):
     menubar_data_management.add_command(label="マスターパスワードの変更", command=funMenu.menubar_change_master_password)
     menubar.add_cascade(label="データ管理", menu=menubar_data_management)
 
-    root["menu"] = menubar #メニューバーを設置
+    main_window["menu"] = menubar #メニューバーを設置

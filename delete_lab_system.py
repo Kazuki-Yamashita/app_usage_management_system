@@ -1,11 +1,10 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import tkinter.messagebox #メッセージボックスを扱うライブラリ
-import usage_management_system_base_infomation as info #基本情報を含むモジュール
-import delete_lab_from_DB as delLabDB #DBから研究室・ゼミを削除するモジュール
+import make_window as mw #ウィンドウを作成するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
-import make_window as mw #ウィンドウを作成するモジュール
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
 import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
+import delete_lab_from_DB as delLabDB #DBから研究室・ゼミを削除するモジュール
 import btn_del_lab #研究室削除ボタンを押した際の処理
 
 

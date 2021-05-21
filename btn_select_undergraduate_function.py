@@ -14,10 +14,10 @@ lab_combobox_delete_user = False #利用者削除画面の学部
 lab_combobox_delete_lab = False #研究室・ゼミ削除画面の学部
 
 
-#学部選択ボタンを押した際に実行される関数
+#研究室表示ボタンを押した際に実行される関数
 def select_undergraduate(window, function, undergraduate_combobox, x, y):
 
-    #学部を選択しているか判定(されていなければFalse)
+    #選択した学部を取得
     selected_undergraduate = undergraduate_combobox.get()
 
     #学部を選択されていない場合、メッセージを表示

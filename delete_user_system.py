@@ -1,7 +1,7 @@
 import tkinter as tk #GUI作成のためのライブラリ
-import usage_management_system_base_infomation as info #基本情報を含むモジュール
-import generate_widget as genWid #ウィジェット生成するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
+import generate_widget as genWid #ウィジェット生成するモジュール
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
 import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
 import btn_del_user #登録情報の削除ボタンを押した際の処理
 

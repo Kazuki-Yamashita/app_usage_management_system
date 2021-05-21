@@ -1,10 +1,10 @@
 import datetime
-import usage_management_system_base_infomation as info #基本情報を含むモジュール
+import show_message as mes #メッセージボックスを表示するモジュール
+import is_input_entry #研究室の選択の有無を判定するモジュール
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
 import create_table_of_used_data as creTable #使用歴の表を作成するモジュール
 import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
 import is_correct_datetime as isCorDate #年月日の入力が適切かどうか判定するモジュール
-import show_message as mes #メッセージボックスを表示するモジュール
-import is_input_entry #研究室の選択の有無を判定するモジュール
 
 
 #使用履歴検索の検索ボタンを押した際の処理

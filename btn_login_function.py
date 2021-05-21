@@ -48,7 +48,8 @@ def btn_login(window, btn_select_undergraduate, btn_login,
     #入力が適切な場合(True)
     if is_input_lab:
         #ログイン認証を行う
-        result_login = abLogin.is_able_login(window, selected_undergraduate, selected_lab, input_ID, input_password)
+        result_login = abLogin.is_able_login(window, selected_undergraduate,
+         selected_lab, input_ID, input_password)
 
         #ログインできた場合(True)
         if result_login:
@@ -57,7 +58,8 @@ def btn_login(window, btn_select_undergraduate, btn_login,
 
             #アプリを起動
             open_result = start_app.start_app(window, app_path)
-            start_using_datetime = datetime.datetime.now() #ログインした日時を取得
+            #ログインした日時を取得
+            start_using_datetime = datetime.datetime.now()
 
             #使用開始の年月日
             display_start_using_date = (

@@ -5,31 +5,35 @@ import connect_db as conDB #DBへ接続するモジュール
 db_list = ('user_db_science.db', 'user_db_engineering.db','user_db_agriculture.db',
  'user_db_fisheries.db', 'user_db_medicine.db', 'user_db_dentistry.db',
   'user_db_low_and_literature.db', 'user_db_education.db')
-all_user_id_list = [] #登録されている全利用者を格納するリスト
-all_table_list = [] #登録されている全研究室を格納するリスト
-search_user_name_list = [] #研究室検索において、該当する学部の研究室を格納するリスト
 
-#新規登録の際に使用する関数
-def confirm_available_id(reg_id): #登録するIDがすでに存在するか確かめる関数
+
+#新規登録の際、登録するIDがすでに使用されているか判定する関数
+def confirm_available_id(reg_id):
+    all_user_id_list = [] #全利用者のIDを格納するリスト
+
     for db in db_list: #学部ごとのデータベースを順に処理
         conn = sqlite3.connect(db)
         cur = conn.cursor()
 
         table_list = [] #table_listを初期化
-        table_sql = "SELECT name FROM sqlite_master WHERE TYPE='table'" #データベースのテーブル名を取得するSQL文
+        #データベースのテーブル名を取得するSQL文
+        table_sql = "SELECT name FROM sqlite_master WHERE TYPE='table'"
         for table in cur.execute(table_sql): #テーブル名を取得
             real_table = table[0] #テーブル名をタプルから抽出
             table_list.append(real_table) #table_listに追加(学部ごとにリセット)
 
-        for now_table_list in table_list: #各テーブルのIDを取得
-            for id in cur.execute('SELECT id from {}'.format(now_table_list)): #テーブルのIDを取得
+        #各テーブルのIDを取得
+        for now_table_list in table_list:
+            #テーブルのIDを取得
+            for id in cur.execute('SELECT id from {}'.format(now_table_list)):
                 real_id = id[0] #IDをタプルから抽出
                 all_user_id_list.append(real_id) #all_user_id_listに追加
 
         cur.close()
         conn.close()
 
-    if reg_id in all_user_id_list: #登録しようとするIDがすでに存在した場合
+    #登録しようとするIDがすでに存在した場合
+    if reg_id in all_user_id_list:
         return False
     else:
         return True
@@ -37,11 +41,11 @@ def confirm_available_id(reg_id): #登録するIDがすでに存在するか確�
 
 #研究室一覧をDBから抽出する関数
 def confirm_reged_lab(reg_lab):
+    all_table_list = [] #登録されている全研究室を格納するリスト
+
     for db in db_list: #学部ごとのデータベースを順に処理
         conn = sqlite3.connect(db)
         cur = conn.cursor()
-
-        table_list = [] #table_listを初期化
 
         #データベースのテーブル名を取得するSQL文
         table_sql = "SELECT name FROM sqlite_master WHERE TYPE='table'"
@@ -62,6 +66,7 @@ def confirm_reged_lab(reg_lab):
 #ログインする際にIDが存在するか確認する関数
 def exist_id(input_ID, undergraduate, lab):
     lab_id_list = [] #該当する研究室のIDを格納するリスト
+
     return_db = conDB.connect_user_db(undergraduate)
     cur = return_db[0]
     conn = return_db[1]
@@ -72,11 +77,11 @@ def exist_id(input_ID, undergraduate, lab):
         real_id = id[0]
         lab_id_list.append(real_id)
 
+    cur.close()
+    conn.close()
+
     #入力したIDが存在しない場合
     if input_ID not in lab_id_list:
         return False
     else:
         return True
-
-    cur.close()
-    conn.close()
