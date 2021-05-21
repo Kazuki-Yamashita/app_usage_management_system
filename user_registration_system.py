@@ -37,7 +37,7 @@ def registration(root):
          "readonly", info.undergraduate_list, "学部入力", 130, 100)
 
         #学部選択ボタン
-        btn_reg_undergraduate = tk.Button(registration_window, text="学部を選択") #学部選択ボタンを生成
+        btn_reg_undergraduate = tk.Button(registration_window, text="学部の研究室・ゼミを表示") #学部選択ボタンを生成
         btn_reg_undergraduate.place(x=290, y=100) #学部生成ボタンを配置
         btn_reg_undergraduate['command'] = lambda: btnUnderInReg.btn_undergraduate_in_user_registration(
          registration_window, input_user_name, input_user_name_ruby, reg_undergraduate_combo)

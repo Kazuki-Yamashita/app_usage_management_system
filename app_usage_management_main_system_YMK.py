@@ -2,12 +2,13 @@ import tkinter as tk #GUI作成のためのライブラリ
 import tkinter.messagebox #メッセージボックスを扱うライブラリ
 import make_window as mw #ウィンドウを作成するモジュール
 import menubar #メニューバーを作成しているファイル
-import user_registration_system as regSys #新規登録を行うモジュール
-import usage_management_system_base_infomation as info #基本情報を提供するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
-import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
+import user_registration_system as regSys #新規利用者登録を行うモジュール
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
+import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
 import btn_login_function as btnLogin #ログインボタンを押した際の処理
 import display_now_time as dispTime #現在の時刻を表示するモジュール
+
 
 #任意のアプリケーションの絶対パスを入力(先頭の"r"を忘れないこと)
 app_path =r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
@@ -43,7 +44,7 @@ genWid.generate_label_widget(root, "パスワード : ", 50, 190)
 txt_password = genWid.generate_entry_widget(root, 30, 130, 190, '*')
 
 #学部選択ボタンを生成、配置、コマンド指定
-btn_select_undergraduate = tk.Button(root, text='学部を選択')
+btn_select_undergraduate = tk.Button(root, text='学部の研究室・ゼミを表示')
 btn_select_undergraduate.place(x=300, y=50)
 btn_select_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
                                         root, "login", login_undergraduate_combobox, 130, 90)

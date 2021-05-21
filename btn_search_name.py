@@ -1,8 +1,10 @@
-import usage_management_system_base_infomation as info #基本情報を含むモジュール
-import generate_widget as genWid #ウィジェット生成するモジュール
-import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
-import convert_widget_state as conWid #ウィジェットを無効化するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import generate_widget as genWid #ウィジェット生成するモジュール
+import convert_widget_state as conWid #ウィジェットを無効化するモジュール
+import usage_management_system_base_infomation as info #基本情報を含むモジュール
+import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
+import is_input_entry #研究室の選択の有無を判定するモジュール
+
 
 #利用者検索の検索ボタンを押した際の処理
 def btn_search_user_name(window, search_user_undergraduate_combobox,
@@ -27,18 +29,16 @@ def btn_search_user_name(window, search_user_undergraduate_combobox,
         mes.error("研究室・ゼミを選択してください", window)
         return
 
-    #検索する研究室を取得
+    #選択した研究室を取得
     search_user_name_lab = btnUnder.lab_combobox_search_user.get()
 
     global result_label
 
-    if not search_user_name_lab: #研究室を選択していない場合
-        mes.error("研究室・ゼミを選択してください", window)
-        return
-    elif search_user_name_lab not in lab_list: #選択した学部と研究室・ゼミが一致しない場合
-        mes.error("選択した学部と研究室・ゼミが一致していません", window)
-        return
-    else:
+    #研究室の選択が適切かどうか判定(True or False)
+    is_input_lab = is_input_entry.is_select_lab(window, search_user_name_lab, lab_list)
+
+    #研究室の選択が適切な場合(True)
+    if is_input_lab:
         print(search_user_name_undergraduate)
         print(search_user_name_lab)
         #選択した研究室の利用者の名前とフリガナを取得

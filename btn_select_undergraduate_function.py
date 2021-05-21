@@ -2,6 +2,7 @@ import usage_management_system_base_infomation as info #基本情報を提供す
 import show_message as mes #メッセージボックスを表示するモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 
+
 #変数の用意
 selected_undergraduate = False
 lab_combobox = False

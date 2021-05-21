@@ -2,7 +2,7 @@ import tkinter as tk #GUI作成のためのライブラリ
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
-import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
+import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
 import btn_del_user #登録情報の削除ボタンを押した際の処理
 
 
@@ -24,7 +24,7 @@ def delete_user():
 
 
     #学部選択のボタンを生成、配置、コマンド指定
-    btn_search_name_undergraduate = tk.Button(delete_user_window, text='学部を選択')
+    btn_search_name_undergraduate = tk.Button(delete_user_window, text='学部の研究室・ゼミを表示')
     btn_search_name_undergraduate.place(x=320, y=20)
     btn_search_name_undergraduate['command'] = lambda: btnUnder.select_undergraduate(
      delete_user_window, "delete_user", delete_user_undergraduate_combobox, 150, 60)

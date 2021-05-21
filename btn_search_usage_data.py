@@ -1,9 +1,11 @@
 import datetime
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import create_table_of_used_data as creTable #使用歴の表を作成するモジュール
-import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
+import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
 import is_correct_datetime as isCorDate #年月日の入力が適切かどうか判定するモジュール
 import show_message as mes #メッセージボックスを表示するモジュール
+import is_input_entry #研究室の選択の有無を判定するモジュール
+
 
 #使用履歴検索の検索ボタンを押した際の処理
 def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
@@ -30,15 +32,11 @@ def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
     #検索する研究室を取得
     search_usage_data_lab = btnUnder.lab_combobox_search_usage_data.get()
 
-    #以下、ファイル分け可能
-    #研究室のコンボボックスが表示されているが、選択せずに検索ボタンを押した場合
-    if not search_usage_data_lab:
-        mes.error("研究室・ゼミを選択してください", window)
-        return
+    #研究室の選択が適切かどうか判定(True or False)
+    is_input_lab = is_input_entry.is_select_lab(window, search_usage_data_lab, lab_list)
 
-    #選択した学部と研究室・ゼミが一致しない場合
-    if search_usage_data_lab not in lab_list:
-        mes.error("選択した学部と研究室・ゼミが一致していません", window)
+    #研究室の選択が適切でない場合(False)
+    if not is_input_lab:
         return
 
     desig_ornot = select_radiobutton.get() #選択しているラジオボタンを取得

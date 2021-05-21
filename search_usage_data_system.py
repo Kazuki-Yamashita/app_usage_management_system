@@ -2,10 +2,11 @@ import tkinter as tk #GUI作成のためのライブラリ
 import usage_management_system_base_infomation as info #基本情報を含むモジュール
 import generate_widget as genWid #ウィジェット生成するモジュール
 import make_window as mw #ウィンドウを作成するモジュール
-import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
+import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
 import radio_button_command_in_search_usage_data as rdBtnCom #使用歴検索のラジオボタンのコマンドを記述
 import btn_search_usage_data as btnSeaData #使用歴検索の検索ボタンのコマンドを記述
 import generate_strings_in_search_usage_data as indiStr #文字を表示する処理をまとめて記述
+
 
 #メニューバーから「使用履歴の検索」を選択した際の処理
 def search_used_data():

@@ -5,8 +5,6 @@ import connect_db as conDB #DBへ接続するモジュール
 
 undergraduate_list = ["理学部","工学部","農学部","水産学部","医学部","歯学部","法文学部","教育学部"] #学部一覧
 
-
-
 master_password_list = [] #登録されているマスターパスワードを格納する変数
 
 

@@ -1,15 +1,16 @@
 import tkinter as tk #GUI作成のためのライブラリ
 import datetime #日時を取得するライブラリ
-import usage_management_system_base_infomation as info #基本情報を提供するモジュール
-import convert_widget_state as conWid #ウィジェットを無効化するモジュール
-import btn_select_undergraduate_function as btnUnder #学部選択ボタンを押した際に実行される処理
 import show_message as mes #メッセージボックスを表示するモジュール
-import is_input_entry as isInp #入力項目にすべて入力しているか判定するモジュール
+import convert_widget_state as conWid #ウィジェットを無効化するモジュール
+import usage_management_system_base_infomation as info #基本情報を提供するモジュール
+import btn_select_undergraduate_function as btnUnder #研究室表示ボタンを押した際に実行される処理
+import is_input_entry #入力項目にすべて入力しているか判定するモジュール
 import is_able_login as abLogin #ログイン可能か判定するモジュール
 import login_certification_system as logCe #ログイン認証を行うモジュール
 import start_app #アプリケーションを起動させるモジュール
 import btn_logout_function as btnLogout #ログアウトボタンを押した際に実行される処理
 import close_window_function_before_logout as cloWin #ログアウト前に画面を閉じようとした際の処理を記述したファイル
+
 
 #画面の状態を記述
 open_result = "before login"
@@ -41,11 +42,11 @@ def btn_login(window, btn_select_undergraduate, btn_login,
     selected_lab = btnUnder.lab_combobox_login.get()
 
     #入力欄への入力が適切か判定(True or False)
-    is_input = isInp.is_input_entry_login(selected_lab, input_ID,
+    is_input_lab = is_input_entry.is_input_entry_login(selected_lab, input_ID,
      input_password, lab_list, window)
 
     #入力が適切な場合(True)
-    if is_input:
+    if is_input_lab:
         #ログイン認証を行う
         result_login = abLogin.is_able_login(window, selected_undergraduate, selected_lab, input_ID, input_password)
 
