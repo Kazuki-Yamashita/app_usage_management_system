@@ -68,10 +68,10 @@ def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day):
 
     #研究室のテーブルが存在しない場合、テーブルを作成
     create_sql = 'CREATE TABLE IF NOT EXISTS {}(id text, name text, name_ruby text, start_time text, finish_time text, using_time text, memo text)'.format(lab)
+    cur.execute(create_sql) #実行
     #使用歴を抽出するSQL文
     sql = "SELECT id, name, name_ruby, start_time, finish_time, using_time, memo FROM {}".format(lab)
     usage_record_list = [] #使用歴リストを格納するリスト
-    usage_record_list.clear() #使用歴のリストをクリア
 
     for record in cur.execute(sql):
         data_list = [] #リストを初期化
@@ -85,14 +85,20 @@ def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day):
 
         data_list = [id_data, name_data, name_ruby_data, start_time_data, finish_time_data, using_time_data, memo_data]
         if desig_ornot == "no": #検索期間を指定していない場合
-            usage_record_list.append(data_list) #1回分の使用履歴のリストを、使用歴をまとめるリストに代入
+            #1回分の使用履歴のリストを、使用歴をまとめるリストに代入
+            usage_record_list.append(data_list)
         elif desig_ornot == "yes": #検索期間を措定している場合
             #DBから抽出した日付の文字列を、日付の型に変換
             datetype_start_time_data = datetime.datetime.strptime(start_time_data, '%Y-%m-%d %H:%M:%S')
             #DBから抽出した日付が検索期間内の場合
             if datetype_start_time_data >= start_day and datetype_start_time_data <= finish_day:
                 usage_record_list.append(data_list) #リストに追加
+
     return usage_record_list
+
+    conn.commit() #データベースへの反映
+    cur.close()
+    conn.close() #データベースを閉じる
 
 
 #マスターパスワードの情報を提供する関数
@@ -103,14 +109,15 @@ def offer_master_password():
     conn = sqlite3.connect(db_name) #マスターパスワードのDBに接続
     cur = conn.cursor()
 
-    #テーブルが存在しない場合、テーブルを作成
+    #テーブルが存在しない場合、テーブルを作成(初回)
     create_sql = 'CREATE TABLE IF NOT EXISTS master (master_password)'
     cur.execute(create_sql) #実行
 
+    #マスターパスワードを抽出するSQL文
     select_sql = 'SELECT master_password FROM master'
-    master_password_list.clear() #マスターパスワードを格納するリストをクリア
 
-    for password in cur.execute(select_sql): #登録されているマスターパスワードを取得
+    #登録されているマスターパスワードをDBから抽出
+    for password in cur.execute(select_sql):
         master_password_list.append(password[0])
 
     if not master_password_list: #パスワードが設定されていない場合(初回のみ)
@@ -118,9 +125,10 @@ def offer_master_password():
         initial_password = ["master_initial-password_YMK"]
 
         cur.execute(insert_sql, initial_password) #初期のマスターパスワードを設定
-
-    return master_password_list
+        master_password_list.append("master_initial-password_YMK")
 
     conn.commit() #データベースへの反映
     cur.close()
     conn.close() #データベースを閉じる
+
+    return master_password_list[0]

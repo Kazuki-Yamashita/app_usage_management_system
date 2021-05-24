@@ -1,12 +1,15 @@
 import change_master_password_in_DB as chaPassDB
 import show_message as mes #メッセージボックスを表示するモジュール
 
-#変更ボタンを押した際の処理
+
+#マスターパスワードの変更ボタンを押した際の処理
 def conn_change_master_password(
 window, previous_master_password, new_password, confirm_password):
 
-    new_master_password = new_password.get() #新しいマスターパスワードを取得
-    new_confirm_master_password = confirm_password.get() #新しいマスターパスワード(確認用)を取得
+    #新しいマスターパスワードを取得
+    new_master_password = new_password.get()
+    #新しいマスターパスワード(確認用)を取得
+    new_confirm_master_password = confirm_password.get()
 
     #新しいマスターパスワードと確認用が異なる場合
     if new_master_password != new_confirm_master_password:

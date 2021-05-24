@@ -31,39 +31,47 @@ def delete_user_btn(window, del_txt_id, del_txt_password,
           return
 
       #選択した研究室を取得
-      delete_user_lab = btnUnder.lab_combobox_delete_user.get()
+      try:
+          delete_user_lab = btnUnder.lab_combobox_delete_user.get()
+      except:
+          mes.error("研究室・ゼミを選択してください", window)
+          return
 
       #入力欄への入力が適切か判定(True or False)
       is_input = is_input_entry.is_input_entry_login(delete_user_lab, input_ID,
        input_password, lab_list, window)
 
-      #入力が適切な場合(True)
-      if is_input:
-          #ログイン認証を行う
-          result_login = abLogin.is_able_login(window, delete_user_undergraduate,
-           delete_user_lab, input_ID, input_password)
+      #入力が適切でない場合(False)
+      if not is_input:
+          return
 
-          #ログインできた場合(True)
-          if result_login:
-              #削除する登録者の名前を取得して代入
-              delete_user_name = logCe.name
-              #削除の最終確認で表示するメッセージ
-              message = "本当に登録者を削除しますか？\n ID : " + input_ID + "\n name : " + delete_user_name
-              #削除の最終確認画面
-              delete_user_confirmation = mes.askokcancel("登録者削除 最終確認", message, window)
+      #ログイン認証を行う
+      result_login = abLogin.is_able_login(window, delete_user_undergraduate,
+       delete_user_lab, input_ID, input_password)
 
-          #「OK」を押した場合
-          if delete_user_confirmation:
-              #削除を実行
-              delete_ornot = delUserDB.delete_user_from_DB(delete_user_undergraduate, delete_user_lab, input_ID)
+      #ログインできた場合(True)
+      if result_login:
+          #削除する登録者の名前を取得して代入
+          delete_user_name = logCe.name
+          #削除の最終確認で表示するメッセージ
+          message = "本当に登録者を削除しますか？\n ID : " + input_ID + "\n name : " + delete_user_name
+          #削除の最終確認画面
+          delete_user_confirmation = mes.askokcancel("登録者削除 最終確認", message, window)
+      else: #ログインできなかった場合(False)
+          return
 
-              #削除に成功した場合(True)
-              if delete_ornot:
-                  mes.info("登録者削除 完了", "登録者の削除を完了しました", window)
-                  #画面を消す
-                  window.destroy()
+      #「OK」を押した場合
+      if delete_user_confirmation:
+          #削除を実行
+          delete_ornot = delUserDB.delete_user_from_DB(delete_user_undergraduate, delete_user_lab, input_ID)
 
-              #削除に失敗した場合(False)
-              else:
-                  mes.error("登録者の削除に失敗しました", window)
-                  return
+          #削除に成功した場合(True)
+          if delete_ornot:
+              mes.info("登録者削除 完了", "登録者の削除を完了しました", window)
+              #画面を消す
+              window.destroy()
+
+          #削除に失敗した場合(False)
+          else:
+              mes.error("登録者の削除に失敗しました", window)
+              return

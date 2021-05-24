@@ -26,7 +26,11 @@ def btn_delete_lab(window, delete_lab_undergraduate_combobox):
         return
 
     #選択した研究室を取得
-    delete_lab_lab = btnUnder.lab_combobox_delete_lab.get()
+    try:
+        delete_lab_lab = btnUnder.lab_combobox_delete_lab.get()
+    except:
+        mes.error("研究室・ゼミを選択してください", window)
+        return
 
     #研究室の選択が適切かどうか判定(True or False)
     is_input_lab = is_input_entry.is_select_lab(window, delete_lab_lab, lab_list)
@@ -36,6 +40,8 @@ def btn_delete_lab(window, delete_lab_undergraduate_combobox):
         message = "本当に研究室・ゼミを削除しますか？"
         #研究室・ゼミ削除の確認画面
         delete_lab_confirmation = tk.messagebox.askokcancel("研究室・ゼミ削除 確認画面", message, parent=window)
+    else: #研究室を選択していない場合
+        return
 
     if delete_lab_confirmation: #「OK」を押した場合
         final_message = "研究室・ゼミを削除した場合、該当する研究室・ゼミの利用登録者の情報も削除されます。\n使用履歴は削除されません"

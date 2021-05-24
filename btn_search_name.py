@@ -41,23 +41,25 @@ def btn_search_user_name(window, search_user_undergraduate_combobox,
     #研究室の選択が適切かどうか判定(True or False)
     is_input_lab = is_input_entry.is_select_lab(window, search_user_name_lab, lab_list)
 
-    #研究室の選択が適切な場合(True)
-    if is_input_lab:
-        #選択した研究室の利用者の名前とフリガナを取得
-        search_user_name_dict = info.offer_user_name(search_user_name_undergraduate, search_user_name_lab)
+    #研究室の選択が適切でない場合(False)
+    if not is_input_lab:
+        return
+        
+    #選択した研究室の利用者の名前とフリガナを取得
+    search_user_name_dict = info.offer_user_name(search_user_name_undergraduate, search_user_name_lab)
 
-        #表示する結果を変数に代入
-        for disp_id in search_user_name_dict:
-            display = display + "・" + str(search_user_name_dict[disp_id]) + "(" + str(disp_id) + ")\n"
-        if len(search_user_name_dict) == 0: #登録者がいない場合
-            display = "登録されていません"
+    #表示する結果を変数に代入
+    for disp_id in search_user_name_dict:
+        display = display + "・" + str(search_user_name_dict[disp_id]) + "(" + str(disp_id) + ")\n"
+    if len(search_user_name_dict) == 0: #登録者がいない場合
+        display = "登録されていません"
 
-        #登録者を表示するラベルを生成
-        result_label = genWid.generate_label_widget(window, display, 20, 150)
-        result_label["bg"] = "white"
+    #登録者を表示するラベルを生成
+    result_label = genWid.generate_label_widget(window, display, 20, 150)
+    result_label["bg"] = "white"
 
-        #無効化するウィジェットをリスト化
-        disabled_widget_list = [btn_exe_search, search_user_undergraduate_combobox, btn_search_user_name_undergraduate, lab_combobox]
-        conWid.to_disabled_widget(disabled_widget_list) #指定したウィジェットを無効化
-        #検索結果の削除ボタンを有効化
-        conWid.to_normal_widget([btn_del])
+    #無効化するウィジェットをリスト化
+    disabled_widget_list = [btn_exe_search, search_user_undergraduate_combobox, btn_search_user_name_undergraduate, lab_combobox]
+    conWid.to_disabled_widget(disabled_widget_list) #指定したウィジェットを無効化
+    #検索結果の削除ボタンを有効化
+    conWid.to_normal_widget([btn_del])

@@ -2,9 +2,9 @@ import generate_widget as genWid #ウィジェット生成するモジュール
 
 #使用歴検索画面において、文字を表示する処理
 def indicate_strings(window):
-    genWid.generate_label_widget(window, "学部 : ", 60, 20)
-    genWid.generate_label_widget(window, "研究室・ゼミ : ", 25, 60)
-    genWid.generate_label_widget(window, "検索期間 : ", 40, 100)
+    genWid.generate_label_widget(window, "学部 : ", 84, 20)
+    genWid.generate_label_widget(window, "研究室・ゼミ : ", 48, 60)
+    genWid.generate_label_widget(window, "検索期間 : ", 60, 100)
     genWid.generate_label_widget(window, "検索開始 年月日 : ", 20, 160)
     genWid.generate_label_widget(window, "検索終了 年月日 : ", 20, 220)
     genWid.generate_label_widget(window, "年", 195, 160)

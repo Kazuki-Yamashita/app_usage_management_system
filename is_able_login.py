@@ -2,7 +2,7 @@ import show_message as mes #メッセージボックスを表示するモジュ�
 import confirm_available_id_system as conid #IDが存在するか調べる
 import login_certification_system as logCe #ログイン認証を行うモジュール
 
-
+#ログインできるかの判定結果を返す関数
 def is_able_login(window, undergraduate, lab, id, password):
 
     #IDが存在しない場合

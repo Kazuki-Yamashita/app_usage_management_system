@@ -44,52 +44,55 @@ def btn_login(window, btn_select_undergraduate, btn_login,
     #入力欄への入力が適切か判定(True or False)
     is_input_lab = is_input_entry.is_input_entry_login(selected_lab, input_ID,
      input_password, lab_list, window)
+    #入力が適切でない場合(False)
+    if not is_input_lab:
+        return
 
-    #入力が適切な場合(True)
-    if is_input_lab:
-        #ログイン認証を行う
-        result_login = abLogin.is_able_login(window, selected_undergraduate,
-         selected_lab, input_ID, input_password)
+    #ログイン認証を行う
+    result_login = abLogin.is_able_login(window, selected_undergraduate,
+     selected_lab, input_ID, input_password)
+    #ログインできなかった場合(False)
+    if not result_login:
+        return
 
-        #ログインできた場合(True)
-        if result_login:
-            user_name = logCe.name #ログインした人の名前を取得
-            user_name_ruby = logCe.name_ruby #ログインした人の名前のフリガナを取得
+    #以下、ログインできた場合
+    user_name = logCe.name #ログインした人の名前を取得
+    user_name_ruby = logCe.name_ruby #ログインした人の名前のフリガナを取得
 
-            #アプリを起動
-            open_result = start_app.start_app(window, app_path)
-            #ログインした日時を取得
-            start_using_datetime = datetime.datetime.now()
+    #アプリを起動
+    open_result = start_app.start_app(window, app_path)
+    #ログインした日時を取得
+    start_using_datetime = datetime.datetime.now()
 
-            #使用開始の年月日
-            display_start_using_date = (
-                                        str(start_using_datetime.year)  + '年'
-                                      + str(start_using_datetime.month) + '月'
-                                      + str(start_using_datetime.day)   + '日'
-                                      )
-            #使用開始の時間
-            display_start_using_time = (
-                                        str(start_using_datetime.hour)  + '時'
-                                      + str(start_using_datetime.minute)+ '分'
-                                      + str(start_using_datetime.second) + '秒'
-                                      )
+    #使用開始の年月日
+    display_start_using_date = (
+                                str(start_using_datetime.year)  + '年'
+                              + str(start_using_datetime.month) + '月'
+                              + str(start_using_datetime.day)   + '日'
+                              )
+    #使用開始の時間
+    display_start_using_time = (
+                                str(start_using_datetime.hour)  + '時'
+                              + str(start_using_datetime.minute)+ '分'
+                              + str(start_using_datetime.second) + '秒'
+                              )
 
-            #ログイン完了の画面、日時を表示する
-            mes.info("ログイン完了", display_start_using_date + "　" + display_start_using_time
-            + "\nログインしました", window)
+    #ログイン完了の画面、日時を表示する
+    mes.info("ログイン完了", display_start_using_date + "　" + display_start_using_time
+    + "\nログインしました", window)
 
-            btn_login.destroy() #「ログイン」ボタンを消す
-            btn_new_registration.destroy() #「新規登録」ボタンを消す
+    btn_login.destroy() #「ログイン」ボタンを消す
+    btn_new_registration.destroy() #「新規登録」ボタンを消す
 
-            #ログイン後、無効化するウィジェットをリストで指定し、無効化
-            disabled_widget_list = [undergraduate_combobox, btn_select_undergraduate, btnUnder.lab_combobox_login, id, password]
-            conWid.to_disabled_widget(disabled_widget_list)
+    #ログイン後、無効化するウィジェットをリストで指定し、無効化
+    disabled_widget_list = [undergraduate_combobox, btn_select_undergraduate, btnUnder.lab_combobox_login, id, password]
+    conWid.to_disabled_widget(disabled_widget_list)
 
-            #ログアウトボタンの生成、配置、コマンド指定
-            btn_logout = tk.Button(window, text="ログアウト", bg='skyblue', height=2, width=7)
-            btn_logout.place(x=180, y=240) #ログアウトボタンの配置
-            btn_logout["command"] = lambda: btnLogout.logout(open_result, selected_undergraduate,
-                 selected_lab, input_ID, user_name, user_name_ruby, start_using_datetime, window)
+    #ログアウトボタンの生成、配置、コマンド指定
+    btn_logout = tk.Button(window, text="ログアウト", bg='skyblue', height=2, width=7)
+    btn_logout.place(x=180, y=240) #ログアウトボタンの配置
+    btn_logout["command"] = lambda: btnLogout.logout(open_result, selected_undergraduate,
+         selected_lab, input_ID, user_name, user_name_ruby, start_using_datetime, window)
 
     #ログアウト後に画面を閉じようとした際の処理
     window.protocol('WM_DELETE_WINDOW',

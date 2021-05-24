@@ -14,7 +14,7 @@ def search_used_data():
 
     #学部の文字とコンボボックスを生成
     search_lab_undergraduate_combobox = genWid.generate_combobox_widget(
-        search_used_data_window, "readonly", info.undergraduate_list, "学部選択", 110, 20)
+        search_used_data_window, "readonly", info.undergraduate_list, "学部選択", 140, 20)
 
     #文字を表示
     indiStr.indicate_strings(search_used_data_window)
@@ -45,23 +45,23 @@ def search_used_data():
     #「期間を指定しない」ラジオボタンの生成、配置、コマンド指定
     rb_not_designate = tk.Radiobutton(search_used_data_window, variable=val, value="no",
      text='期間を指定しない(すべての使用歴を検索)')
-    rb_not_designate.place(x=120, y=100)
+    rb_not_designate.place(x=130, y=100)
     rb_not_designate["command"] = lambda: rdBtnCom.designate_search_span("not_disignate",
      spin_start_year, combo_start_month, combo_start_day,
      spin_finish_year, combo_finish_month, combo_finish_day)
 
     #「期間を指定する」ラジオボタンの生成、配置、コマンド指定
     rb_designate = tk.Radiobutton(search_used_data_window, variable=val, value="yes", text='期間を指定する')
-    rb_designate.place(x=120, y=130)
+    rb_designate.place(x=130, y=130)
     rb_designate["command"] = lambda: rdBtnCom.designate_search_span("disignate",
      spin_start_year, combo_start_month, combo_start_day,
      spin_finish_year, combo_finish_month, combo_finish_day)
 
     #学部選択ボタンの生成、配置、コマンド指定
     btn_search_name_undergraduate = tk.Button(search_used_data_window, text='学部の研究室・ゼミを表示')
-    btn_search_name_undergraduate.place(x=300, y=20)
+    btn_search_name_undergraduate.place(x=320, y=20)
     btn_search_name_undergraduate["command"] = lambda: btnUnder.select_undergraduate(
-    search_used_data_window, "search_usage_data", search_lab_undergraduate_combobox, 110, 60)
+    search_used_data_window, "search_usage_data", search_lab_undergraduate_combobox, 140, 60)
 
     #検索ボタンの生成、配置、コマンド指定
     btn_exe_search = tk.Button(search_used_data_window, text="検索", height=2, width=7)

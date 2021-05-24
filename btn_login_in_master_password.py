@@ -6,14 +6,11 @@ import show_message as mes #メッセージボックスを表示するモジュ�
 
 #「マスターログイン」ボタンを押した際の処理
 def login_master(window, master_function, input_password):
-    
-    input_master_password = input_password.get() #入力したパスワードを取得
-    info.offer_master_password() #設定されているマスターパスワードを取得
 
-    try: #登録されているマスターパスワードを取得
-        login_master_password = info.master_password_list[0]
-    except: #初回のみ実行される
-        login_master_password = "master_initial-password_YMK"
+    #入力したパスワードを取得
+    input_master_password = input_password.get()
+    #設定されているマスターパスワードを取得
+    login_master_password = info.offer_master_password()
 
     #入力したマスターパスワードが正しい場合
     if input_master_password == login_master_password:

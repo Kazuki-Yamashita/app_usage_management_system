@@ -37,10 +37,10 @@ login_undergraduate_combobox = genWid.generate_combobox_widget(
 genWid.generate_label_widget(main_window, "研究室・ゼミ : ", 50, 90)
 
 #IDとパスワードの文字と入力欄を生成
-genWid.generate_label_widget(main_window, "ユーザーID : ", 50, 150)
+genWid.generate_label_widget(main_window, "ユーザーID : ", 63, 150)
 txt_id = genWid.generate_entry_widget(main_window, 30, 130, 150)
 
-genWid.generate_label_widget(main_window, "パスワード : ", 50, 190)
+genWid.generate_label_widget(main_window, "パスワード : ", 65, 190)
 txt_password = genWid.generate_entry_widget(main_window, 30, 130, 190, '*')
 
 #研究室表示ボタンを生成、配置、コマンド指定

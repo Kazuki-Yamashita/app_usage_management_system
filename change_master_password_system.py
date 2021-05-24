@@ -5,6 +5,7 @@ import make_window as mw #ウィンドウを作成するモジュール
 import btn_change_master_password_function as btnChaMaster
 
 
+#マスターパスワードの変更画面
 def change_master_password(login_master_password):
     change_master_password_window = mw.make_window("マスターパスワード 変更画面", '360x190')
 
@@ -23,7 +24,6 @@ def change_master_password(login_master_password):
     master_caution = genWid.generate_label_widget(change_master_password_window,
      "設定するマスターパスワードは25文字以上にしてください", 20, 110)
     master_caution["bg"] = "white"
-
 
     #「変更」ボタンの生成、配置、コマンド指定
     btn_change_master_password = tk.Button(change_master_password_window, text="変更する", height=2, width=10)

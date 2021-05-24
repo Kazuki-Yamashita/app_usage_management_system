@@ -8,16 +8,10 @@ def login_certification(input_ID, input_password, undergraduate, lab):
     cur = return_db[0]
     conn = return_db[1]
 
-    global master_password
     #マスターパスワードをDBから抽出
-    info.offer_master_password()
+    master_password = info.offer_master_password()
 
-    try: #マスターパスワードを取得
-        master_password = info.master_password_list[0]
-    except: #初回のみ実行される
-        master_password = "master_initial-password_YMK"
-
-    #該当する学部のDBから入力されたIDのパスワードを取得
+    #該当する学部のDBから、入力されたIDのパスワードを取得
     select_sql = 'SELECT name, name_ruby, password FROM {} WHERE id = ?'.format(lab)
     input_ID = [input_ID]
     real_password = None

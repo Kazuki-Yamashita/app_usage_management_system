@@ -15,12 +15,15 @@ def delete_user():
     delete_user_undergraduate_combobox = genWid.generate_combobox_widget(
         delete_user_window, "readonly", info.undergraduate_list, "学部選択", 150, 20)
 
-    #ID、パスワードの入力欄を生成
-    genWid.generate_label_widget(delete_user_window, "ユーザーID : ", 50, 120)
-    del_txt_id = genWid.generate_entry_widget(delete_user_window, 30, 130, 120)
+    #研究室・ゼミ選択の文字を表示
+    genWid.generate_label_widget(delete_user_window, "研究室・ゼミ : ", 50, 60)
 
-    genWid.generate_label_widget(delete_user_window, "パスワード : ", 50, 160)
-    del_txt_password = genWid.generate_entry_widget(delete_user_window, 30, 130, 160, "*")
+    #ID、パスワードの入力欄を生成
+    genWid.generate_label_widget(delete_user_window, "ユーザーID : ", 61, 120)
+    del_txt_id = genWid.generate_entry_widget(delete_user_window, 30, 150, 120)
+
+    genWid.generate_label_widget(delete_user_window, "パスワード : ", 64, 160)
+    del_txt_password = genWid.generate_entry_widget(delete_user_window, 30, 150, 160, "*")
 
 
     #学部選択のボタンを生成、配置、コマンド指定

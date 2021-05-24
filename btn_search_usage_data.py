@@ -53,7 +53,7 @@ def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
          spin_start_year, combo_start_month, combo_start_day,
          spin_finish_year, combo_finish_month, combo_finish_day)
 
-        #入力が適切でない場合、処理を中断
+        #入力した年月日が適切でない場合、処理を中断
         if not datetime_result:
             return
 
@@ -65,9 +65,9 @@ def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
     else: #検索年月日にNoneを代入
         search_start_time = search_finish_time = None
 
-    #選択した研究室の使用履歴を取得
-    used_record = info.offer_used_data(search_usage_data_undergraduate, search_usage_data_lab, desig_ornot,
-     search_start_time, search_finish_time)
+    #選択した研究室の使用履歴を取得(リスト)
+    used_record = info.offer_used_data(search_usage_data_undergraduate, search_usage_data_lab,
+     desig_ornot, search_start_time, search_finish_time)
 
     if len(used_record) == 0: #使用歴がない場合
         mes.error("使用歴がありません", window)
