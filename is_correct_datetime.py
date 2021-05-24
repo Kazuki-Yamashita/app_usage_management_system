@@ -37,8 +37,8 @@ def is_correct_datetime(window, spin_start_year, combo_start_month, combo_start_
 
     #検索終了の年月日が存在するか判定
     try:
-        finish_time = datetime.datetime(search_finish_year, search_finish_month, search_finish_day)
-        finish_time = finish_time + td_1d #検索終了期間に1日分追加して更新
+        finish_time = datetime.datetime(search_finish_year, search_finish_month,
+         search_finish_day)
     except: #日付が存在しない場合
         mes.error("検索終了の日時が存在しません", window)
         return False
@@ -47,5 +47,8 @@ def is_correct_datetime(window, spin_start_year, combo_start_month, combo_start_
     if start_time > finish_time:
         mes.error("検索期間が適切ではありません", window)
         return False
+
+    #検索終了期間に1日分追加して更新
+    finish_time = finish_time + td_1d
 
     return start_time, finish_time

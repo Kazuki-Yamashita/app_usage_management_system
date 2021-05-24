@@ -3,9 +3,8 @@ import datetime
 import connect_db as conDB #DBへ接続するモジュール
 
 
-undergraduate_list = ["理学部","工学部","農学部","水産学部","医学部","歯学部","法文学部","教育学部"] #学部一覧
-
-master_password_list = [] #登録されているマスターパスワードを格納する変数
+#学部のリスト
+undergraduate_list = ["理学部","工学部","農学部","水産学部","医学部","歯学部","法文学部","教育学部"]
 
 
 #選択した学部の研究室情報を提供する関数
@@ -98,6 +97,8 @@ def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day):
 
 #マスターパスワードの情報を提供する関数
 def offer_master_password():
+    master_password_list = [] #登録されているマスターパスワードを格納する変数
+
     db_name = 'master_password_db.db'
     conn = sqlite3.connect(db_name) #マスターパスワードのDBに接続
     cur = conn.cursor()
@@ -117,6 +118,8 @@ def offer_master_password():
         initial_password = ["master_initial-password_YMK"]
 
         cur.execute(insert_sql, initial_password) #初期のマスターパスワードを設定
+
+    return master_password_list
 
     conn.commit() #データベースへの反映
     cur.close()

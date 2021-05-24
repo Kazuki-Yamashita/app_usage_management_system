@@ -18,24 +18,24 @@ def btn_undergraduate_in_user_registration(window,
     else:
         #研究室・ゼミの選択に関するメッセージ
         lab_message = "※研究室・ゼミの選択について\n所属する研究室・ゼミがない場合、直接入力してください。\n名前はローマ字で、(名)_(姓)としてください"
-        genWid.generate_message_widget(window, lab_message, 200, "white", 400, 80)
+        genWid.generate_message_widget(window, lab_message, 200, "white", 380, 70)
 
         #研究室の新規登録の有無を調べるチェックボックスの有無を判定する記述
         bvar = tk.BooleanVar(master=window)
         bvar.set(False)
         new_lab = tk.Checkbutton(window, text="新規で研究室を登録", fg="red", variable=bvar)
-        new_lab.place(x=400, y=150)
+        new_lab.place(x=270, y=140)
 
         #選択した学部の研究室情報を取得
         lab_list = info.offer_lab_list(user_reg_undergraduate)
 
         #「研究室・ゼミ」のコンボボックスを生成
-        input_lab_name = genWid.generate_combobox_widget(window, "normal", lab_list, "研究室選択", 130, 140)
+        input_lab_name = genWid.generate_combobox_widget(window, "normal", lab_list, "研究室選択", 120, 140)
 
         #id、パスワード、パスワード確認用の入力欄を生成
-        input_id = genWid.generate_entry_widget(window, 30, 130, 180)
-        input_new_password = genWid.generate_entry_widget(window, 30, 130, 220, "*")
-        input_confirm_password = genWid.generate_entry_widget(window, 30, 130, 260, "*")
+        input_id = genWid.generate_entry_widget(window, 30, 120, 180)
+        input_new_password = genWid.generate_entry_widget(window, 30, 120, 220, "*")
+        input_confirm_password = genWid.generate_entry_widget(window, 30, 120, 260, "*")
 
         #idの書式に関するメッセージ
         id_format_message = "※IDの書式\n・8~16文字\n・アルファベット、数字を各1文字以上含む\n　(大文字・小文字問わず)\n・ひらがな、カタカナ、漢字、全角アルファベット、数字は不可"

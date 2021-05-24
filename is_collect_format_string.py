@@ -5,7 +5,7 @@ import re
 #名前のパターンが合っているか判定する関数
 def pattern_name(investigate_name):
     #数字、全角アルファベットを含む場合
-    if re.search(r'[1-9]|[Ａ-Ｚ]|[ａ-ｚ]',investigate_name):
+    if re.search(r'[0-9０-９]|[Ａ-Ｚ]|[ａ-ｚ]',investigate_name):
         return False
     else: #漢字、ひらがな、カタカナ、半角アルファベットが使用可能
         return True
@@ -13,7 +13,7 @@ def pattern_name(investigate_name):
 #フリガナのパターンが合っているか判定する関数
 def pattern_ruby_name(investigate_ruby_name):
     #数字、ひらがな、半角カタカナ、漢字、全角アルファベットを含む場合
-    if re.search(r'[1-9]|[ぁ-ん]|[ｦ-ﾟ]|[一-龥]|[Ａ-Ｚ]|[ａ-ｚ]',investigate_ruby_name):
+    if re.search(r'[0-9０-９]|[ぁ-ん]|[ｦ-ﾟ]|[一-龥]|[Ａ-Ｚ]|[ａ-ｚ]',investigate_ruby_name):
         return False
     else: #全角カタカナ、半角アルファベットが使用可能
         return True
@@ -30,10 +30,10 @@ def pattern_id(investigate_id):
     elif re.search(r'\s',investigate_id):
         return False
     #数字を含まない場合
-    elif not re.search(r'[1-9]+',investigate_id):
+    elif not re.search(r'[0-9]+',investigate_id):
         return False
-    #ひらがな、カタカナ、漢字、全角アルファベットを含む場合
-    elif re.search(u'[ぁ-んァ-ン]|[ｦ-ﾟ]|[一-龥]|[Ａ-Ｚ]+|[ａ-ｚ]+',investigate_id):
+    #ひらがな、カタカナ、漢字、全角英数字を含む場合
+    elif re.search(u'[ぁ-んァ-ン]|[ｦ-ﾟ]|[一-龥]|[０-９]|[Ａ-Ｚ]+|[ａ-ｚ]+',investigate_id):
         return False
     else:
         return True
@@ -58,8 +58,8 @@ def pattern_password(investigate_password):
     #数字を含まない場合
     elif not re.search(r'[1-9]+',investigate_password):
         return False
-    #ひらがな、カタカナ、漢字、全角アルファベットを含む場合
-    elif re.search(u'[ぁ-んァ-ン]|[ｦ-ﾟ]|[一-龥]|[Ａ-Ｚ]+|[ａ-ｚ]+',investigate_password):
+    #ひらがな、カタカナ、漢字、全角英数字を含む場合
+    elif re.search(u'[ぁ-んァ-ン]|[ｦ-ﾟ]|[一-龥]|[０-９]|[Ａ-Ｚ]+|[ａ-ｚ]+',investigate_password):
         return False
     else:
         return True

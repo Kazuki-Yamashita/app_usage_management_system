@@ -30,7 +30,11 @@ def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
         return
 
     #検索する研究室を取得
-    search_usage_data_lab = btnUnder.lab_combobox_search_usage_data.get()
+    try:
+        search_usage_data_lab = btnUnder.lab_combobox_search_usage_data.get()
+    except:
+        mes.error("研究室・ゼミを選択してください", window)
+        return
 
     #研究室の選択が適切かどうか判定(True or False)
     is_input_lab = is_input_entry.is_select_lab(window, search_usage_data_lab, lab_list)
@@ -39,7 +43,8 @@ def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
     if not is_input_lab:
         return
 
-    desig_ornot = select_radiobutton.get() #選択しているラジオボタンを取得
+    #選択しているラジオボタンを取得
+    desig_ornot = select_radiobutton.get()
 
     #期間を指定している場合
     if desig_ornot == "yes":
@@ -61,16 +66,12 @@ def btn_search_usage_data(window, undergraduate_combobox, select_radiobutton,
         search_start_time = search_finish_time = None
 
     #選択した研究室の使用履歴を取得
-    try:
-        used_record = info.offer_used_data(search_usage_data_undergraduate, search_usage_data_lab, desig_ornot,
-         search_start_time, search_finish_time)
-    except:
-        if len(used_record) == 0: #使用歴がない場合
-            mes.error("使用歴がありません", window)
-            return
-        else: #何らかの理由で検索できなかった場合
-            mes.error("使用歴の検索に失敗しました", window)
-            return
+    used_record = info.offer_used_data(search_usage_data_undergraduate, search_usage_data_lab, desig_ornot,
+     search_start_time, search_finish_time)
+
+    if len(used_record) == 0: #使用歴がない場合
+        mes.error("使用歴がありません", window)
+        return
 
     #使用歴をcsvで出力
     try: #pandasを用いて使用歴の表を作成

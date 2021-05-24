@@ -29,8 +29,12 @@ def btn_search_user_name(window, search_user_undergraduate_combobox,
         mes.error("研究室・ゼミを選択してください", window)
         return
 
-    #選択した研究室を取得
-    search_user_name_lab = btnUnder.lab_combobox_search_user.get()
+
+    try: #選択した研究室を取得
+        search_user_name_lab = btnUnder.lab_combobox_search_user.get()
+    except:
+        mes.error("研究室・ゼミを選択してください", window)
+        return
 
     global result_label
 
@@ -39,8 +43,6 @@ def btn_search_user_name(window, search_user_undergraduate_combobox,
 
     #研究室の選択が適切な場合(True)
     if is_input_lab:
-        print(search_user_name_undergraduate)
-        print(search_user_name_lab)
         #選択した研究室の利用者の名前とフリガナを取得
         search_user_name_dict = info.offer_user_name(search_user_name_undergraduate, search_user_name_lab)
 
