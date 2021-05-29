@@ -38,7 +38,7 @@ def btn_undergraduate_in_user_registration(window,
         input_confirm_password = genWid.generate_entry_widget(window, 30, 120, 260, "*")
 
         #idの書式に関するメッセージ
-        id_format_message = "※IDの書式\n・8~16文字\n・アルファベット、数字を各1文字以上含む\n　(大文字・小文字問わず)\n・ひらがな、カタカナ、漢字、全角アルファベット、数字は不可"
+        id_format_message = "※IDの書式\n・8~16文字\n・アルファベット、数字を各1文字以上含む\n　(大文字・小文字問わず)\n・ひらがな、カタカナ、漢字、全角英数字は不可"
         genWid.generate_message_widget(window, id_format_message, 230, "white", 350, 180)
 
         #パスワードの書式に関するメッセージ

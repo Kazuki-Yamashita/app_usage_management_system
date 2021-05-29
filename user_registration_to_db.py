@@ -4,7 +4,7 @@ import connect_db as conDB #DBへ接続するモジュール
 #データベースの操作を行う
 def registration_user(reg_id, reg_name, reg_ruby_name, reg_undergraduate, reg_lab, password1, reg_time):
     #DBへ接続する
-    return_db = conDB.connect_user_db(reg_undergraduate)
+    return_db = conDB.connect_db(reg_undergraduate, "user")
     cur = return_db[0]
     conn = return_db[1]
 

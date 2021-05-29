@@ -4,7 +4,8 @@ import connect_db as conDB #DBへ接続するモジュール
 
 
 #学部のリスト
-undergraduate_list = ["理学部","工学部","農学部","水産学部","医学部","歯学部","法文学部","教育学部"]
+undergraduate_list = ["理学部","工学部","農学部","水産学部","医学部",
+"歯学部","法文学部","教育学部"]
 
 
 #選択した学部の研究室情報を提供する関数
@@ -14,10 +15,10 @@ def offer_lab_list(undergraduate, type="normal"):
 
     #使用履歴の検索の場合
     if type == "usage data":
-        return_db = conDB.connect_usage_db(undergraduate)
+        return_db = conDB.connect_db(undergraduate, "usage")
     #使用履歴の検索以外の場合
     else:
-        return_db = conDB.connect_user_db(undergraduate)
+        return_db = conDB.connect_db(undergraduate, "user")
 
     if not return_db:
         return False
@@ -40,7 +41,7 @@ def offer_lab_list(undergraduate, type="normal"):
 #選択した研究室の利用登録者を提供する関数
 def offer_user_name(search_undergraduate, search_name_lab):
     #DBへ接続
-    return_db = conDB.connect_user_db(search_undergraduate)
+    return_db = conDB.connect_db(search_undergraduate, "user")
     cur = return_db[0]
     conn = return_db[1]
 
@@ -62,7 +63,7 @@ def offer_user_name(search_undergraduate, search_name_lab):
 #使用歴の情報を提供する関数
 def offer_used_data(undergraduate, lab, desig_ornot, start_day, finish_day):
     #DBへ接続
-    return_db = conDB.connect_usage_db(undergraduate)
+    return_db = conDB.connect_db(undergraduate, "usage")
     cur = return_db[0]
     conn = return_db[1]
 

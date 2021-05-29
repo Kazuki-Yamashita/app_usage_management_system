@@ -67,7 +67,7 @@ def confirm_reged_lab(reg_lab):
 def exist_id(input_ID, undergraduate, lab):
     lab_id_list = [] #該当する研究室のIDを格納するリスト
 
-    return_db = conDB.connect_user_db(undergraduate)
+    return_db = conDB.connect_db(undergraduate, "user")
     cur = return_db[0]
     conn = return_db[1]
     cur = conn.cursor()

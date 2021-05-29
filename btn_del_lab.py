@@ -44,7 +44,7 @@ def btn_delete_lab(window, delete_lab_undergraduate_combobox):
         return
 
     if delete_lab_confirmation: #「OK」を押した場合
-        final_message = "研究室・ゼミを削除した場合、該当する研究室・ゼミの利用登録者の情報も削除されます。\n使用履歴は削除されません"
+        final_message = "研究室・ゼミを削除した場合、該当する研究室・ゼミの利用登録者の情報、使用履歴も削除されます。\n削除する前に全使用履歴を出力することをお勧めします。"
         #研究室・ゼミ削除の最終確認画面
         delete_lab_final_confirmation = tk.messagebox.askokcancel("研究室・ゼミ削除 最終確認画面", final_message, parent=window)
 
@@ -56,5 +56,5 @@ def btn_delete_lab(window, delete_lab_undergraduate_combobox):
                 mes.error("研究室・ゼミの削除に失敗しました", window)
                 return
             else: #削除できた場合
-                mes.info("登録者削除 完了", "登録者の削除を完了しました", window)
+                mes.info("研究室・ゼミの削除 完了", "研究室・ゼミの削除を完了しました", window)
                 window.destroy()

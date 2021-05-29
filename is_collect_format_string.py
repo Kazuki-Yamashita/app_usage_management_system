@@ -56,7 +56,7 @@ def pattern_password(investigate_password):
     elif not re.search(r'[-=_@]+',investigate_password):
         return False
     #数字を含まない場合
-    elif not re.search(r'[1-9]+',investigate_password):
+    elif not re.search(r'[0-9]+',investigate_password):
         return False
     #ひらがな、カタカナ、漢字、全角英数字を含む場合
     elif re.search(u'[ぁ-んァ-ン]|[ｦ-ﾟ]|[一-龥]|[０-９]|[Ａ-Ｚ]+|[ａ-ｚ]+',investigate_password):

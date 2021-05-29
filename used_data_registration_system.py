@@ -4,7 +4,7 @@ import connect_db as conDB #DBへ接続するモジュール
 
 #使用歴をDBに登録する関数
 def used_data_registration(undergraduate, lab, id, name, name_ruby, start_time, finish_time, using_second_time, memo):
-    return_db = conDB.connect_usage_db(undergraduate)
+    return_db = conDB.connect_db(undergraduate, "usage")
     cur = return_db[0]
     conn = return_db[1]
 

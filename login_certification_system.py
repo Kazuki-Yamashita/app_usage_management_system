@@ -4,7 +4,7 @@ import connect_db as conDB #DBへ接続するモジュール
 
 #ログイン認証を行う関数
 def login_certification(input_ID, input_password, undergraduate, lab):
-    return_db = conDB.connect_user_db(undergraduate)
+    return_db = conDB.connect_db(undergraduate, "user")
     cur = return_db[0]
     conn = return_db[1]
 
